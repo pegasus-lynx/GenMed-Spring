@@ -1,0 +1,224 @@
+CREATE TABLE Address
+(
+  plot_no INT,
+  street VARCHAR(32),
+  city VARCHAR(32) NOT NULL,
+  state VARCHAR(32) NOT NULL,
+  pin_code VARCHAR(6) NOT NULL,
+  latitude NUMERIC(13,10) NOT NULL,
+  longitude NUMERIC(13,10) NOT NULL,
+  address_id INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (address_id)
+);
+
+CREATE TABLE User
+(
+  first_name VARCHAR(16) NOT NULL,
+  last_name VARCHAR(32),
+  email_id VARCHAR(48) NOT NULL,
+  user_id INT NOT NULL  AUTO_INCREMENT,
+  password VARCHAR(48) NOT NULL,
+  PRIMARY KEY (user_id)
+);
+
+CREATE TABLE Generic_Drugs
+(
+  gen_id INT NOT NULL  AUTO_INCREMENT,
+  name VARCHAR(64) NOT NULL,
+  PRIMARY KEY (gen_id)
+);
+
+CREATE TABLE User_phone_no
+(
+  phone_no INT NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY (phone_no, user_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+CREATE TABLE Generic_Drug_composition
+(
+  component_name VARCHAR(48) NOT NULL,
+  percent NUMERIC(4,2) NOT NULL,
+  comp_id INT NOT NULL AUTO_INCREMENT,
+  gen_id INT NOT NULL,
+  PRIMARY KEY (comp_id),
+  FOREIGN KEY (gen_id) REFERENCES Generic_Drugs(gen_id)
+);
+
+CREATE TABLE addressOfUser
+(
+  type ENUM('Home', 'Work', 'Other') NOT NULL,
+  user_id INT NOT NULL,
+  address_id INT NOT NULL,
+  PRIMARY KEY (user_id, address_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id),
+  FOREIGN KEY (address_id) REFERENCES Address(address_id)
+);
+
+CREATE TABLE Brand
+(
+  brand_id INT NOT NULL AUTO_INCREMENT,
+  brand_name VARCHAR(32) NOT NULL,
+  est_date DATE NOT NULL,
+  reg_no VARCHAR(12) NOT NULL,
+  PRIMARY KEY (brand_id)
+);
+
+CREATE TABLE Shop
+(
+  shop_id INT NOT NULL AUTO_INCREMENT,
+  shop_name VARCHAR(64) NOT NULL,
+  email_id VARCHAR(48) NOT NULL,
+  license VARCHAR(10) NOT NULL,
+  address_id INT NOT NULL,
+  PRIMARY KEY (shop_id),
+  FOREIGN KEY (address_id) REFERENCES Address(address_id)
+);
+
+CREATE TABLE Manufacturer
+(
+  manufacturer_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(48) NOT NULL,
+  mfg_license VARCHAR(12) NOT NULL,
+  type ENUM('Generic', 'Branded', 'Both') NOT NULL,
+  address_id INT NOT NULL,
+  brand_id INT NOT NULL,
+  PRIMARY KEY (manufacturer_id),
+  FOREIGN KEY (address_id) REFERENCES Address(address_id),
+  FOREIGN KEY (brand_id) REFERENCES Brand(brand_id)
+);
+
+CREATE TABLE Orders
+(
+  order_id INT NOT NULL AUTO_INCREMENT,
+  status ENUM('Ordered', 'Dispatched', 'Delivered', 'Returned', 'Cancelled') NOT NULL,
+  order_date DATE NOT NULL,
+  bill_amount NUMERIC(7,2) NOT NULL,
+  shop_id INT NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY (order_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+CREATE TABLE Drugs
+(
+  drug_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(32) NOT NULL,
+  gen_id INT NOT NULL,
+  brand_id INT NOT NULL,
+  PRIMARY KEY (drug_id),
+  FOREIGN KEY (gen_id) REFERENCES Generic_Drugs(gen_id),
+  FOREIGN KEY (brand_id) REFERENCES Brand(brand_id)
+);
+
+CREATE TABLE Shop_phone_no
+(
+  phone_no VARCHAR(13) NOT NULL,
+  shop_id INT NOT NULL,
+  PRIMARY KEY (phone_no, shop_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id)
+);
+
+CREATE TABLE Shop_inventory
+(
+  batch_id INT NOT NULL,
+  quantity INT NOT NULL,
+  shop_id INT NOT NULL,
+  PRIMARY KEY (batch_id, shop_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id)
+);
+
+CREATE TABLE Staff
+(
+  salary NUMERIC(8,2) NOT NULL,
+  date_of_joining DATE NOT NULL,
+  user_id INT NOT NULL,
+  shop_id INT NOT NULL,
+  PRIMARY KEY (user_id, shop_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id)
+);
+
+CREATE TABLE Owner
+(
+  shop_pin INT NOT NULL,
+  user_id INT NOT NULL,
+  shop_id INT NOT NULL,
+  PRIMARY KEY (user_id, shop_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id)
+);
+
+CREATE TABLE Pharmacist
+(
+  registration_no VARCHAR(10) NOT NULL,
+  date_of_first_reg DATE NOT NULL,
+  registration_council VARCHAR(32) NOT NULL,
+  pharmacist_id INT NOT NULL AUTO_INCREMENT,
+  shop_id INT NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY (pharmacist_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+CREATE TABLE Pharmacist_Qualifications
+(
+  degree ENUM('B.Pharm', 'M.Pharm') NOT NULL,
+  college_name VARCHAR(48) NOT NULL,
+  year_of_passing INT NOT NULL,
+  qualification_id INT NOT NULL AUTO_INCREMENT,
+  pharmacist_id INT NOT NULL,
+  PRIMARY KEY (qualification_id),
+  FOREIGN KEY (pharmacist_id) REFERENCES Pharmacist(pharmacist_id)
+);
+
+CREATE TABLE Reviews
+(
+  comment VARCHAR(1024) NOT NULL,
+  rating NUMERIC(3,2) NOT NULL,
+  review_id INT NOT NULL AUTO_INCREMENT,
+  order_id INT NOT NULL,
+  user_id INT NOT NULL,
+  PRIMARY KEY (review_id),
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+  FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
+CREATE TABLE Drug_Batch
+(
+  batch_no VARCHAR(16) NOT NULL,
+  batch_id INT NOT NULL AUTO_INCREMENT,
+  exp_date DATE NOT NULL,
+  price NUMERIC(6,2) NOT NULL,
+  quanity INT NOT NULL,
+  mfg_date DATE NOT NULL,
+  drug_id INT NOT NULL,
+  PRIMARY KEY (batch_id),
+  FOREIGN KEY (drug_id) REFERENCES Drugs(drug_id)
+);
+
+CREATE TABLE suppliedTo
+(
+  quantity INT NOT NULL,
+  date_of_arrival DATE NOT NULL,
+  shop_id INT NOT NULL,
+  batch_id INT NOT NULL,
+  PRIMARY KEY (shop_id, batch_id),
+  FOREIGN KEY (shop_id) REFERENCES Shop(shop_id),
+  FOREIGN KEY (batch_id) REFERENCES Drug_Batch(batch_id)
+);
+
+CREATE TABLE itemsOrdered
+(
+  quantity INT NOT NULL,
+  price NUMERIC(6,2) NOT NULL,
+  item_id INT NOT NULL AUTO_INCREMENT,
+  order_id INT NOT NULL,
+  batch_id INT NOT NULL,
+  PRIMARY KEY (item_id),
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+  FOREIGN KEY (batch_id) REFERENCES Drug_Batch(batch_id)
+);
