@@ -1,0 +1,30 @@
+From user's view :
+
+    Should be able to search shops having a certain medicine. ( under different criterias ).
+    Should be able to search shops.
+    Should have an account ( thus we need to setup the authentication system )
+    Can order items from different shops.
+    Can view their previous order details.
+    The search page will also have a map that will show the marks of all the points.
+
+
+From shop's view :
+
+    Should be able to login to see the current info about the shops income and current details.
+    Should be able to view the general information about the shop and should be able to modify the shop.
+    Should be able to view and manage the staffs, and inventory ( add or delete items from the inventory ).
+    Should have a pending orders screen from where they can view the pending orders.
+
+    Should also be able to keep track of supply orders made from the manufactures and what is the status of those orders.
+
+    The main dash board will show the revenue of the shop.
+
+    The problem here is to keep a check that one shop owner can't check the info of other shop. Well this can be done by checking the authentication of these pages.
+
+
+    NOTE : Once the medicine in the shop is off then the table from the inventory also must be deleted.
+
+Later :
+    Apart from this one another problem is how to make a master list of the generic medicine drug mapping with their custom drugs ( This needs to be verified )
+    Moreover one needs to add some information about ehat a generic medicine is used for, means what does it treat and what are it's other branded conterparts.
+    Should add a search screen that searches and gives the information about the medicine. ( Should be filtered by the generic name or brand name ).

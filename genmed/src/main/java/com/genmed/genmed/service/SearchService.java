@@ -18,8 +18,10 @@ public class SearchService {
     public List<Shop> searchShopByCity(String city){
         return null;
     }
-
     public List<Shop> searchShopByName(String shop_name){
         return null;
     }
+
+    public Medicine searchMedicineDetails(String med_name, String type) { return null; };
+
 }

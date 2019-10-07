@@ -1,9 +1,163 @@
 <html>
 <head>
     <title> GenMed - Pharma Solution </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive/responsive.css">
 </head>
 
 <body>
+
+<div class="dorne-search-form d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-close-btn" id="closeBtn">
+                        <i class="pe-7s-close-circle" aria-hidden="true"></i>
+                    </div>
+                    <form action="#" method="get">
+                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
+                        <input type="submit" class="d-none" value="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <header class="header_area" id="header">
+            <div class="container-fluid h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <nav class="h-100 navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html"><img src="/img/core-img/logo.png" alt=""></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+                            <!-- Nav -->
+                            <div class="collapse navbar-collapse" id="dorneNav">
+                                <ul class="navbar-nav mr-auto" id="dorneMenu">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="index.html">Home</a>
+                                            <a class="dropdown-item" href="explore.html">Explore</a>
+                                            <a class="dropdown-item" href="listing.html">Listing</a>
+                                            <a class="dropdown-item" href="single-listing.html">Single Listing</a>
+                                            <a class="dropdown-item" href="contact.html">Contact</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listings <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                            <a class="dropdown-item" href="index.html">Home</a>
+                                            <a class="dropdown-item" href="explore.html">Explore</a>
+                                            <a class="dropdown-item" href="listing.html">Listing</a>
+                                            <a class="dropdown-item" href="single-listing.html">Single Listing</a>
+                                            <a class="dropdown-item" href="contact.html">Contact</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                                <!-- Search btn -->
+                                <div class="dorne-search-btn">
+                                    <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+                                </div>
+                                <!-- Signin btn -->
+                                <div class="dorne-signin-btn">
+                                    <a href="#">Sign in  or Register</a>
+                                </div>
+                                <!-- Add listings btn -->
+                                <div class="dorne-add-listings-btn">
+                                    <a href="#" class="btn dorne-btn">+ Add Listings</a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="dorne-welcome-area bg-img bg-overlay" style="background-image: url(/img/bg-img/hero-1.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <div class="hero-content">
+                            <h2>Discover places near you</h2>
+                            <h4>This is the best guide of your city</h4>
+                        </div>
+                        <!-- Hero Search Form -->
+                        <div class="hero-search-form">
+                            <!-- Tabs -->
+                            <div class="nav nav-tabs" id="heroTab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-places-tab" data-toggle="tab" href="#nav-places" role="tab" aria-controls="nav-places" aria-selected="true">Places</a>
+                                <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="#nav-events" role="tab" aria-controls="nav-events" aria-selected="false">Events</a>
+                            </div>
+                            <!-- Tabs Content -->
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
+                                    <h6>What are you looking for?</h6>
+                                    <form action="#" method="get">
+                                        <select class="custom-select">
+                                            <option selected>Your Destinations</option>
+                                            <option value="1">New York</option>
+                                            <option value="2">Latvia</option>
+                                            <option value="3">Dhaka</option>
+                                            <option value="4">Melbourne</option>
+                                            <option value="5">London</option>
+                                        </select>
+                                        <select class="custom-select">
+                                            <option selected>All Catagories</option>
+                                            <option value="1">Catagories 1</option>
+                                            <option value="2">Catagories 2</option>
+                                            <option value="3">Catagories 3</option>
+                                        </select>
+                                        <select class="custom-select">
+                                            <option selected>Price Range</option>
+                                            <option value="1">$100 - $499</option>
+                                            <option value="2">$500 - $999</option>
+                                            <option value="3">$1000 - $4999</option>
+                                        </select>
+                                        <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Search</button>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="nav-events" role="tabpanel" aria-labelledby="nav-events-tab">
+                                    <h6>What are you looking for?</h6>
+                                    <form action="#" method="get">
+                                        <select class="custom-select">
+                                            <option selected>Your Destinations</option>
+                                            <option value="1">New York</option>
+                                            <option value="2">Latvia</option>
+                                            <option value="3">Dhaka</option>
+                                            <option value="4">Melbourne</option>
+                                            <option value="5">London</option>
+                                        </select>
+                                        <select class="custom-select">
+                                            <option selected>All Catagories</option>
+                                            <option value="1">Catagories 1</option>
+                                            <option value="2">Catagories 2</option>
+                                            <option value="3">Catagories 3</option>
+                                        </select>
+                                        <select class="custom-select">
+                                            <option selected>Price Range</option>
+                                            <option value="1">$100 - $499</option>
+                                            <option value="2">$500 - $999</option>
+                                            <option value="3">$1000 - $4999</option>
+                                        </select>
+                                        <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<!-- jQuery-2.2.4 js -->
+<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Bootstrap-4 js -->
+<script src="/js/bootstrap/bootstrap.min.js"></script>
 
 </body>
 </html>
