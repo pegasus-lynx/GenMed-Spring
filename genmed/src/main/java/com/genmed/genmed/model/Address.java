@@ -9,7 +9,6 @@ public class Address {
     private Double longitude;
     private String pin_code;
 
-    private PinCode pin;
 
     public int getAddress_id() {
         return address_id;
@@ -57,13 +56,5 @@ public class Address {
 
     public void setPin_code(String pin_code) {
         this.pin_code = pin_code;
-    }
-
-    public PinCode getPin() {
-        return pin;
-    }
-
-    public void setPin(PinCode pin) {
-        this.pin = pin;
     }
 }

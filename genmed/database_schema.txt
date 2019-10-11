@@ -2,7 +2,7 @@ CREATE TABLE user
 (
   first_name VARCHAR(16) NOT NULL,
   last_name VARCHAR(32),
-  user_id INT NOT NULL,
+  user_id INT NOT NULL AUTO_INCREMENT,
   password VARCHAR(48) NOT NULL,
   email_id VARCHAR(32) NOT NULL,
   PRIMARY KEY (user_id)
@@ -10,14 +10,14 @@ CREATE TABLE user
 
 CREATE TABLE genericDrugs
 (
-  gen_id INT NOT NULL,
+  gen_id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(64) NOT NULL,
   PRIMARY KEY (gen_id)
 );
 
 CREATE TABLE drugs
 (
-  drug_id INT NOT NULL,
+  drug_id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(48) NOT NULL,
   mf_name VARCHAR(48) NOT NULL,
   is_generic INT NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE userPhone
 
 CREATE TABLE drugComponents
 (
-  comp_id INT NOT NULL,
+  comp_id INT NOT NULL AUTO_INCREMENT,
   comp_name VARCHAR(36) NOT NULL,
   PRIMARY KEY (comp_id)
 );
@@ -57,7 +57,7 @@ CREATE TABLE drugBatch
   mfg_date DATE NOT NULL,
   exp_date DATE NOT NULL,
   price NUMERIC(8,2) NOT NULL,
-  batch_id INT NOT NULL,
+  batch_id INT NOT NULL AUTO_INCREMENT,
   drug_id INT NOT NULL,
   PRIMARY KEY (batch_id),
   FOREIGN KEY (drug_id) REFERENCES drugs(drug_id)
@@ -70,13 +70,13 @@ CREATE TABLE address
   locality VARCHAR(32) NOT NULL,
   latitude NUMERIC(13,10) NOT NULL,
   longitude NUMERIC(13,10) NOT NULL,
-  address_id INT NOT NULL,
+  address_id INT NOT NULL AUTO_INCREMENT,
   pincode VARCHAR(6) NOT NULL,
   PRIMARY KEY (address_id),
   FOREIGN KEY (pincode) REFERENCES pincodeTable(pincode)
 );
 
-CREATE TABLE genericDrugCmposition
+CREATE TABLE genericDrugComposition
 (
   percent NUMERIC(4,2) NOT NULL,
   gen_id INT NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE addressOfUser
 
 CREATE TABLE shop
 (
-  shop_id INT NOT NULL,
+  shop_id INT NOT NULL AUTO_INCREMENT,
   shop_name VARCHAR(64) NOT NULL,
   email_id VARCHAR(48) NOT NULL,
   license VARCHAR(10) NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE shop
 
 CREATE TABLE shopInventory
 (
-  item_id INT NOT NULL,
+  item_id INT NOT NULL AUTO_INCREMENT,
   quantity INT NOT NULL,
   shop_id INT NOT NULL,
   batch_id INT NOT NULL,
@@ -121,8 +121,8 @@ CREATE TABLE shopInventory
 
 CREATE TABLE orders
 (
-  order_id INT NOT NULL,
-  order_status INT NOT NULL,
+  order_id INT NOT NULL AUTO_INCREMENT,
+  order_status ENUM('Ordered', 'Shipped', 'Delivered', 'Returned', 'Cancelled') NOT NULL,
   order_date DATE NOT NULL,
   bill_amount NUMERIC(8,2) NOT NULL,
   shop_id INT NOT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE itemsOrdered
   price NUMERIC(7,2) NOT NULL,
   order_id INT NOT NULL,
   item_id INT NOT NULL,
-  PRIMARY KEY (order_id),
+  PRIMARY KEY (order_id, item_id),
   FOREIGN KEY (order_id) REFERENCES orders(order_id),
   FOREIGN KEY (item_id) REFERENCES shopInventory(item_id)
 );
@@ -164,7 +164,7 @@ CREATE TABLE reviews
 (
   comment VARCHAR(1024) NOT NULL,
   rating NUMERIC(3,2) NOT NULL,
-  review_id INT NOT NULL,
+  review_id INT NOT NULL AUTO_INCREMENT,
   order_id INT NOT NULL,
   PRIMARY KEY (review_id),
   FOREIGN KEY (order_id) REFERENCES orders(order_id)

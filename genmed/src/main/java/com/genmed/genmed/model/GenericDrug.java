@@ -1,8 +1,17 @@
 package com.genmed.genmed.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class GenericDrug {
+
+    @Autowired
+    JdbcTemplate jt;
 
     private Integer gen_id;
     private String name;

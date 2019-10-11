@@ -1,18 +1,9 @@
 package com.genmed.genmed.service;
 
-public class UserService {
+import com.genmed.genmed.model.User;
 
-    public void addUser() {};
-    public void addUserDetails() {};
-    public void updateUserDetails() {};
+public interface UserService {
+    void save(User user);
 
-    public void addUserAddress() {};
-    public void addUserPhone() {};
-    public void addUserEmail() {};
-
-    public void order() {};
-    public void cancelItems() {};
-    public void cancelOrder() {};
-    public void reviewOrder() {};
-
+    User findByUsername(String username);
 }

@@ -2,19 +2,15 @@ package com.genmed.genmed.model;
 
 public class UserAddress {
 
-    enum Address_Type {
-        Home, Work, Other
-    }
-
-    private Address_Type type;
+    private String address_type;
     private Address address;
 
-    public Address_Type getType() {
-        return type;
+    public String getAddress_type() {
+        return address_type;
     }
 
-    public void setType(Address_Type type) {
-        this.type = type;
+    public void setAddress_type(String address_type) {
+        this.address_type = address_type;
     }
 
     public Address getAddress() {

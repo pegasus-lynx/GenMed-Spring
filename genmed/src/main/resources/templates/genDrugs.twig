@@ -1,0 +1,47 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <!-- Fix form -->
+        <h3 class="ft-rw">Search the medicine here</h3>
+        <form action="/drug" method="get" autocomplete="off" id="search">
+            <p>
+                <input type="text" name="drug_name" id="name_box" list="drugs">
+                <datalist id="drugs">
+                    {% for row in drugs %}
+                    <option value="{{ row.drug_name }}">
+                        {% endfor %}
+                </datalist>
+                <input type="hidden" name="drug_id" id="id_box">
+                <input type="submit" name="info" value="Get Info" onclick="getInfo()">
+                <br>
+            </p>
+        </form>
+        <!-- Fix form -->
+    </div>
+</header>
+
+<div class="wrapper">
+    <section>
+        <h2 class="sec_title ft-rw">List of all medicines</h2>
+        <table>
+            <tr>
+                <th> Name </th>
+            </tr>
+            {% for row in genDrugs %}
+            <tr>
+                <td><a href="/gen_drug/{{ row.gen_id }}">{{ row.name }}</a> </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</div>
+
+<script>
+        function setID() {
+            console.log($("#name_box option:selected")
+            $("#id_box").val($("#name_box option:selected").attr('id'))
+        }
+    </script>
+{% endblock %}

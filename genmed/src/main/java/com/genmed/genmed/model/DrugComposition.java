@@ -1,23 +1,37 @@
 package com.genmed.genmed.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.math.BigDecimal;
+
 public class DrugComposition {
 
-    private  DrugComp component;
-    private  Double percent;
+    private int comp_id;
+    private String comp_name;
+    private BigDecimal percent;
 
-    public DrugComp getComponent() {
-        return component;
+    public int getComp_id() {
+        return comp_id;
     }
 
-    public void setComponent(DrugComp component) {
-        this.component = component;
+    public void setComp_id(int comp_id) {
+        this.comp_id = comp_id;
     }
 
-    public Double getPercent() {
+    public String getComp_name() {
+        return comp_name;
+    }
+
+    public void setComp_name(String comp_name) {
+        this.comp_name = comp_name;
+    }
+
+    public BigDecimal getPercent() {
         return percent;
     }
 
-    public void setPercent(Double percent) {
+    public void setPercent(BigDecimal percent) {
         this.percent = percent;
     }
 }

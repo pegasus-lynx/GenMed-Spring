@@ -1,9 +1,15 @@
 package com.genmed.genmed.repository;
 
+import com.genmed.genmed.model.Address;
+import com.genmed.genmed.model.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Repository
@@ -20,10 +26,19 @@ public class AddressDao {
         return jt.queryForObject(sql, new Object[]{plot_no, street, locality, latitude, longitude, pin_code}, Integer.class);
     }
 
-    public String savePinCode(String pin_code, String area, String city, String district, String state) {
-        String query = "insert into pincodeTable(pincode, area, city, district, state) values (?,?,?,?,?)";
-        jt.update(query, pin_code, area, city, district, state);
-
-        return pin_code;
+    public List<UserAddress> getAddressesByID(int user_id){
+        String query = "select * from addressOfUser as au, address as a where a.address_id=au.address_id and au.user_id="+user_id;
+        List<Map<String,Object>> rs = jt.queryForList(query);
+        List<UserAddress> res = new ArrayList<UserAddress>();
+        for ( Map<String,Object> r:rs) {
+            UserAddress u = new UserAddress();
+            u.setAddress_type((String) r.get("address_type"));
+            Address a = new Address();
+            a.setAddress_id((int) r.get("address_id"));
+//            Add other fields here
+            u.setAddress(a);
+            res.add(u);
+        }
+        return res;
     }
 }

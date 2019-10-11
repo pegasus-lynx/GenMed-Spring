@@ -14,6 +14,8 @@ public class User {
     private String email_id;
     private String password;
 
+    private String role;
+
     private List<String> phone_nos;
     private List<UserAddress> user_addresses;
 
@@ -81,5 +83,13 @@ public class User {
 
     public void setShop_id(Integer shop_id) {
         this.shop_id = shop_id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

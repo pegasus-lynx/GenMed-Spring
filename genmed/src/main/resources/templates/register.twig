@@ -1,0 +1,22 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Register </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section id="about">
+        <form action="/register" method="post">
+            <h3 class="ft-rw"> Create your account </h3>
+            <input type="text" placeholder="Email ID" name="email_id">
+            <input type="text" placeholder="First Name" name="first_name">
+            <input type="text" placeholder="Last Name" name="last_name">
+            <input type="password" name="password">
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+</div>
+{% endblock %}
