@@ -1,6 +1,6 @@
 package com.genmed.genmed.service;
 
-import com.genmed.genmed.model.Medicine;
+import com.genmed.genmed.model.Drugs;
 import com.genmed.genmed.model.Shop;
 import org.springframework.stereotype.Service;
 
@@ -8,10 +8,10 @@ import java.util.List;
 
 @Service
 public class SearchService {
-    public List<Medicine> searchByGenName(String med_name){
+    public List<Drugs> searchByGenName(String med_name){
         return null;
     };
-    public List<Medicine> searchByCusName(String med_name){
+    public List<Drugs> searchByCusName(String med_name){
         return null;
     };
 
@@ -22,6 +22,6 @@ public class SearchService {
         return null;
     }
 
-    public Medicine searchMedicineDetails(String med_name, String type) { return null; };
+    public Drugs searchMedicineDetails(String med_name, String type) { return null; };
 
 }

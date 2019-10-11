@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title> GenMed - Pharma Solution </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato|Raleway:600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md sticky-top bg-dark" style="padding-bottom:0">
+    <!-- Title -->
+    <a href="#" class="navbar-brand txt-bd ft-rw" id="home-link">GenMed</a>
+
+    <!-- Search -->
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="base-nav">
+        <ul class="navbar-nav navbar-right" id='left-nav'>
+            <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Login & Signup</a></li>
+            <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Cart</a></li>
+        </ul>
+    </div>
+
+</nav>
+
+<header class="general_header">
+    <div class="page_title">
+        <h1> Address Form </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+    <form action="" method="POST" id="address_form">
+        <input type="text" placeholder="Plot Number" class="login-input" name="plot_no"/>
+        <input type="text" placeholder="Street" class="login-input" name="street"/>
+        <input type="text" placeholder="PinCode" class="login-input" name="pin_code"/>
+        <input type="text" placeholder="Area" class="login-input" name="area"/>
+        <input type="text" placeholder="District" class="login-input" name="district"/>
+        <input type="text" placeholder="State" class="login-input" name="state"/>
+
+        <input type="text" name="latitude" id="lat"/>
+        <input type="text" name="longitude" id="lon"/>
+        <input type="button" class="inp" id="loc_btn" onclick="getLocation()" value="Fetch Location">
+
+        <input type="submit" value="Submit" class="login-button" />
+    </form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

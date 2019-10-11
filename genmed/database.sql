@@ -122,7 +122,7 @@ CREATE TABLE shopInventory
 CREATE TABLE orders
 (
   order_id INT NOT NULL,
-  order_status INT NOT NULL,
+  order_status ENUM('Ordered', 'Shipped', 'Delivered', 'Returned', 'Cancelled') NOT NULL,
   order_date DATE NOT NULL,
   bill_amount NUMERIC(8,2) NOT NULL,
   shop_id INT NOT NULL,

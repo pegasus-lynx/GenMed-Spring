@@ -5,5 +5,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShopService {
 
-    public
+    public void addShopDetails() {};
+    public void updateShopDetails() {};
+    public void addPhone() {};
+
+    public void addSupplyEntry() {};
+    public void changeOrderStatus() {};
+
+    public void addPharmacist() {};
+    public void addStaff() {};
+
 }

@@ -1,6 +1,6 @@
 package com.genmed.genmed.controller;
 
-import com.genmed.genmed.model.Medicine;
+import com.genmed.genmed.model.Drugs;
 import com.genmed.genmed.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,7 @@ public class HomeController {
             @RequestParam(value="name", required=true) String med,
             Model result) {
 
-            List<Medicine> medicines;
+            List<Drugs> medicines;
 
             if (type == FilterByEnum.gen){ medicines = searchService.searchByGenName(med); }
             else if (type == FilterByEnum.cus){ medicines = searchService.searchByCusName(med); }

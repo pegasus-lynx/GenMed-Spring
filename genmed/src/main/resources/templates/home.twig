@@ -1,163 +1,81 @@
 <html>
 <head>
     <title> GenMed - Pharma Solution </title>
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/css/responsive/responsive.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Raleway:600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
 </head>
 
 <body>
 
-<div class="dorne-search-form d-flex align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="search-close-btn" id="closeBtn">
-                        <i class="pe-7s-close-circle" aria-hidden="true"></i>
-                    </div>
-                    <form action="#" method="get">
-                        <input type="search" name="caviarSearch" id="search" placeholder="Search Your Desire Destinations or Events">
-                        <input type="submit" class="d-none" value="submit">
-                    </form>
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-md sticky-top" style="padding-bottom:0">
+        <a href="#" class="navbar-brand txt-bd ft-rw" id="home-link">GenMed</a>
+        <div class="collapse navbar-collapse" id="base-nav">
+            <ul class="navbar-nav navbar-left" id='left-nav'>
+                <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Medicines</a></li>
+                <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Marketplace</a></li>
+            </ul>
         </div>
 
-        <header class="header_area" id="header">
-            <div class="container-fluid h-100">
-                <div class="row h-100">
-                    <div class="col-12 h-100">
-                        <nav class="h-100 navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="index.html"><img src="/img/core-img/logo.png" alt=""></a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dorneNav" aria-controls="dorneNav" aria-expanded="false" aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
-                            <!-- Nav -->
-                            <div class="collapse navbar-collapse" id="dorneNav">
-                                <ul class="navbar-nav mr-auto" id="dorneMenu">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="index.html">Home</a>
-                                            <a class="dropdown-item" href="explore.html">Explore</a>
-                                            <a class="dropdown-item" href="listing.html">Listing</a>
-                                            <a class="dropdown-item" href="single-listing.html">Single Listing</a>
-                                            <a class="dropdown-item" href="contact.html">Contact</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Listings <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                            <a class="dropdown-item" href="index.html">Home</a>
-                                            <a class="dropdown-item" href="explore.html">Explore</a>
-                                            <a class="dropdown-item" href="listing.html">Listing</a>
-                                            <a class="dropdown-item" href="single-listing.html">Single Listing</a>
-                                            <a class="dropdown-item" href="contact.html">Contact</a>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="contact.html">Contact</a>
-                                    </li>
-                                </ul>
-                                <!-- Search btn -->
-                                <div class="dorne-search-btn">
-                                    <a id="search-btn" href="#"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
-                                </div>
-                                <!-- Signin btn -->
-                                <div class="dorne-signin-btn">
-                                    <a href="#">Sign in  or Register</a>
-                                </div>
-                                <!-- Add listings btn -->
-                                <div class="dorne-add-listings-btn">
-                                    <a href="#" class="btn dorne-btn">+ Add Listings</a>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+        <div class="collapse navbar-collapse" id="base-nav">
+            <ul class="navbar-nav navbar-right" id='right-nav'>
+                <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Login & Signup</a></li>
+                <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Cart</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+    {% block content %}
+        <header class="main_header">
+            <div class="bg-image">
+                <h1> GenMed </h1>
+                <h3> Easy Pharma Solution </h3>
             </div>
         </header>
 
-        <section class="dorne-welcome-area bg-img bg-overlay" style="background-image: url(/img/bg-img/hero-1.jpg);">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center justify-content-center">
-                    <div class="col-12 col-md-10">
-                        <div class="hero-content">
-                            <h2>Discover places near you</h2>
-                            <h4>This is the best guide of your city</h4>
-                        </div>
-                        <!-- Hero Search Form -->
-                        <div class="hero-search-form">
-                            <!-- Tabs -->
-                            <div class="nav nav-tabs" id="heroTab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-places-tab" data-toggle="tab" href="#nav-places" role="tab" aria-controls="nav-places" aria-selected="true">Places</a>
-                                <a class="nav-item nav-link" id="nav-events-tab" data-toggle="tab" href="#nav-events" role="tab" aria-controls="nav-events" aria-selected="false">Events</a>
-                            </div>
-                            <!-- Tabs Content -->
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-places" role="tabpanel" aria-labelledby="nav-places-tab">
-                                    <h6>What are you looking for?</h6>
-                                    <form action="#" method="get">
-                                        <select class="custom-select">
-                                            <option selected>Your Destinations</option>
-                                            <option value="1">New York</option>
-                                            <option value="2">Latvia</option>
-                                            <option value="3">Dhaka</option>
-                                            <option value="4">Melbourne</option>
-                                            <option value="5">London</option>
-                                        </select>
-                                        <select class="custom-select">
-                                            <option selected>All Catagories</option>
-                                            <option value="1">Catagories 1</option>
-                                            <option value="2">Catagories 2</option>
-                                            <option value="3">Catagories 3</option>
-                                        </select>
-                                        <select class="custom-select">
-                                            <option selected>Price Range</option>
-                                            <option value="1">$100 - $499</option>
-                                            <option value="2">$500 - $999</option>
-                                            <option value="3">$1000 - $4999</option>
-                                        </select>
-                                        <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Search</button>
-                                    </form>
-                                </div>
-                                <div class="tab-pane fade" id="nav-events" role="tabpanel" aria-labelledby="nav-events-tab">
-                                    <h6>What are you looking for?</h6>
-                                    <form action="#" method="get">
-                                        <select class="custom-select">
-                                            <option selected>Your Destinations</option>
-                                            <option value="1">New York</option>
-                                            <option value="2">Latvia</option>
-                                            <option value="3">Dhaka</option>
-                                            <option value="4">Melbourne</option>
-                                            <option value="5">London</option>
-                                        </select>
-                                        <select class="custom-select">
-                                            <option selected>All Catagories</option>
-                                            <option value="1">Catagories 1</option>
-                                            <option value="2">Catagories 2</option>
-                                            <option value="3">Catagories 3</option>
-                                        </select>
-                                        <select class="custom-select">
-                                            <option selected>Price Range</option>
-                                            <option value="1">$100 - $499</option>
-                                            <option value="2">$500 - $999</option>
-                                            <option value="3">$1000 - $4999</option>
-                                        </select>
-                                        <button type="submit" class="btn dorne-btn"><i class="fa fa-search pr-2" aria-hidden="true"></i> Search</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="wrapper">
+            <section id="about">
+                <h1 class="sec_title"> About Us </h1>
+
+                <div class="content ft-lt">
+                    <p>
+                        <span>
+                            This project is made with a simple aim in the mind - to make healthcare services affordable.<br>
+                            GenMed-Project is aimed at connecting the generic medicine shops to the consumers.
+                            There are many generic medicine shops in each city some owned and run by the govt. and other by individuals
+                            But people don't know about these stores and thus this alternative to high cost medications never strikes in their mind
+                            Here what i have tried to done is to make a web app that helps people find information related to generic
+                            medicine - like their branded names, shops which keep generic medicine and helps locate nearby shops where
+                            a particular generic medicine is available. <br><br>
+                        </span>
+                    </p>
+                    <p>
+                        <span>
+                            A generic medicine is a medication created to be the same as an already
+                            marketed brand-name drug in dosage form, safety, strength, route of
+                            administration, quality, performance characteristics, and intended use.
+                            These similarities help to demonstrate bioequivalence, which means
+                            that a generic medicine works in the same way and provides the same
+                            clinical benefit as its brand-name version. In other words, you can
+                            take a generic medicine as an equal substitute for its brand-name counterpart.
+                        </span>
+                    </p>
+                    <p>
+                        <span>
+                            But due to lack of awareness in our society most people don't know about generic medicines.
+                            Although it doesn't matter for the people who are well off but for the lower section of society
+                            who often give up on healthcare and treatment due to the high cost of medication and equipments
+                            these medicines can be a life saver.
+                        </span>
+                    </p>
                 </div>
-            </div>
-</div>
+            </section>
+        </div>
+    {% endblock %}
 
-<!-- jQuery-2.2.4 js -->
-<script src="/js/jquery/jquery-2.2.4.min.js"></script>
-<!-- Bootstrap-4 js -->
-<script src="/js/bootstrap/bootstrap.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script
 </body>
 </html>
