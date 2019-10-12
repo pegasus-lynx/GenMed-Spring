@@ -102,7 +102,7 @@ public class DrugDao {
     }
 
     public List<DrugComposition> getGenDrugCompositionByID(int gen_id) {
-        String query = "select * from genericDrugCmposition as g, drugComponents as d where g.comp_id=d.comp_id and g.gen_id="+gen_id;
+        String query = "select * from genericDrugComposition as g, drugComponents as d where g.comp_id=d.comp_id and g.gen_id="+gen_id;
         List<Map<String,Object>> rs = jt.queryForList(query);
         List<DrugComposition> res = new ArrayList<DrugComposition>();
         for ( Map<String,Object> r:rs) {

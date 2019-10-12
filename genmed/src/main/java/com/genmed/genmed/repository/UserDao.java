@@ -44,14 +44,15 @@ public class UserDao {
                 u.setLast_name(row.getString("last_name"));
                 u.setEmail_id(row.getString("email_id"));
                 u.setPassword(row.getString("password"));
+                u.setRole(row.getString("role"));
                 return u;
             }
         });
     }
 
-    public void save(String f_name,String l_name,String email_id,String password) {
-        String query = "insert into user(first_name, last_name, email_id, password) values (?,?,?,?)";
-        jt.update(query, f_name, l_name, email_id, password);
+    public void save(String f_name,String l_name,String email_id,String password, String role) {
+        String query = "insert into user(first_name, last_name, email_id, password,role) values (?,?,?,?,?)";
+        jt.update(query, f_name, l_name, email_id, password, role);
     }
 
     public void saveAddressOfUser(String address_type, Integer user_id, Integer address_id) {

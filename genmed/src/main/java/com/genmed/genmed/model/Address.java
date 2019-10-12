@@ -1,13 +1,19 @@
 package com.genmed.genmed.model;
 
+import java.math.BigDecimal;
+
 public class Address {
 
     private int address_id;
     private String plot_no;
     private String street;
-    private Double latitude;
-    private Double longitude;
-    private String pin_code;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
+    private String city;
+    private String district;
+    private String state;
+
+    private String address_type;
 
 
     public int getAddress_id() {
@@ -34,27 +40,51 @@ public class Address {
         this.street = street;
     }
 
-    public Double getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
-    public Double getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public String getPin_code() {
-        return pin_code;
+    public String getCity() {
+        return city;
     }
 
-    public void setPin_code(String pin_code) {
-        this.pin_code = pin_code;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getAddress_type() {
+        return address_type;
+    }
+
+    public void setAddress_type(String address_type) {
+        this.address_type = address_type;
     }
 }

@@ -39,7 +39,6 @@ public class AuthController {
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-
         return "register";
     }
 
@@ -57,23 +56,14 @@ public class AuthController {
         return "redirect:/welcome";
     }
 
-    // @GetMapping(value = { "/login", "/" })
-    // public String login(Model model, String error, String logout) {
-    // if (error != null)
-    // model.addAttribute("error", "Your username and password is invalid.");
-
-    // if (logout != null)
-    // model.addAttribute("message", "You have been logged out successfully.");
-
-    // return "redirect:/login";
-    // }
 
     @GetMapping("/welcome")
     public String welcome(Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        if (userdao.userExists(user.getEmail_id()))
-            return "redirect:/drugs";
+        System.out.println(user.getRole());
+        if ("user".equals(user.getRole()))
+            return "redirect:/self/profile";
         else
-            return "redirect:/shop";
+            return "redirect:/account/shop";
     }
 }

@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private AddressDao addressDao;
 
-    @RequestMapping("/user/profile")
+    @RequestMapping("/self/profile")
     public String userProfile(Model model, Principal p) {
         int user_id = userDao.getUserIDByEmailID(p.getName());
         model.addAttribute("user", userDao.getUserDetailByID(user_id));
@@ -34,50 +34,55 @@ public class UserController {
         return "userProfile";
     }
 
-    @GetMapping("/user/add_address")
-    public String addAddress(Model model) {
+    @GetMapping("/self/add_address")
+    public String addAddress(Model model, Principal p) {
         model.addAttribute("address", new Address());
-        return "address";
+        return "userAddress";
     }
 
-    @PostMapping("/user/add_address")
-    public String addAddress(@ModelAttribute("address") Address address) {
-        return "redirect:/user/profile";
+    @PostMapping("/self/add_address")
+    public String addAddress(@ModelAttribute("address") Address a, Principal p) {
+        int address_id = addressDao.saveAddress(a.getPlot_no(), a.getStreet(), a.getCity(), a.getDistrict(), a.getState(), a.getLatitude(), a.getLongitude());
+        addressDao.saveAddressOfUser(address_id, a.getAddress_type(), userDao.getUserIDByEmailID(p.getName()));
+        return "redirect:/self/profile";
     }
 
-    @GetMapping("user/create_shop")
-    public String addShop(Model model) {
-        model.addAttribute("shop", new Shop());
-        return "addShop";
-    }
 
-    @PostMapping("/user/add_address")
-    public String addShop(@ModelAttribute("shop") Shop shop) {
-        return "redirect:/user/profile";
-    }
-
-    @GetMapping("/user/orders")
-    public String userOrders(Model model){
+    @GetMapping("/self/orders")
+    public String userOrders(Model model, Principal p){
         int user_id = userDao.getUserIDByEmailID(p.getName());
-        model.addAttribute("orders", userDao.getOrdersByUserID(user_id));
+//        model.addAttribute("orders", userDao.getOrdersByUserID(user_id));
         return "userOrders";
     }
 
-    @RequestMapping("/user/order/{order_id}")
+    @RequestMapping("/self/order/{order_id}")
     public String userOrderDetail(Model model){
-        model.addAttribute("order", userDao.getOrderByID(order_id));
+//        model.addAttribute("order", userDao.getOrderByID(order_id));
         return "userOrderDetail";
     }
 
-    @GetMapping("/user/order/{order_id}/add_review")
+    @GetMapping("/self/order/{order_id}/add_review")
     public String userOrderAddReview(Model model){
         model.addAttribute("reviews", new Reviews());
         return "addReview";
     }
 
-    @PostMapping("/user/order/{order_id}/add_review")
+    @PostMapping("/self/order/{order_id}/add_review")
     public String userOrderAddReview(@ModelAttribute("reviews") Reviews reviews, @PathVariable int order_id) {
         return "redirect:/user/order/"+order_id;
+    }
+
+    // Consult before doing this part of the project
+
+    @GetMapping("/self/add_shop")
+    public String addShop(Model model, Principal p) {
+        model.addAttribute("shop", new Shop());
+        return "addShop";
+    }
+
+    @PostMapping("/self/add_shop")
+    public String addShop(@ModelAttribute("shop") Shop shop, Principal p) {
+        return "redirect:/user/profile";
     }
 
 }

@@ -1,21 +1,4 @@
 {% block nav %}
-<!--<nav class="navbar navbar-expand-md sticky-top" style="padding-bottom:0">-->
-<!--    <a href="#" class="navbar-brand txt-bd ft-rw" id="home-link">GenMed</a>-->
-<!--    <div class="collapse navbar-collapse" id="base-nav">-->
-<!--        <ul class="navbar-nav navbar-left" id='left-nav'>-->
-<!--            <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Medicines</a></li>-->
-<!--            <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Marketplace</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
-<!--    <div class="collapse navbar-collapse">-->
-<!--        <ul class="navbar-nav navbar-right" id='right-nav'>-->
-<!--            <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Login & Signup</a></li>-->
-<!--            <li class="nav-item txt-sb ft-rw"><a href="#" class="nav-link">Cart</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
-
 <nav class="menu navbar navbar-expand-md sticky-top bg-dark" id="navigation">
 
     <a href="#" class="navbar-brand txt-bd ft-rw fc-white" id="home-link">GenMed</a>
@@ -24,7 +7,16 @@
     <ul class="navbar-nav navbar-left txt-bd ft-bd" id="left-nav">
         <li class="nav-item"><a href="#" class="nav-link fc-white">Medicines</a></li>
         <li class="nav-item"><a href="#" class="nav-link fc-white">Marketplace</a></li>
-        <li class="nav-item"><a href="#" class="nav-link fc-white">Login & Signup</a></li>
+        <li class="nav-item">
+            {% if user is null %}
+            <a href="/login" class="nav-link fc-white">Login</a>
+            <a href="/register" class="nav-link fc-white">Register</a>
+            {% else %}
+            <a href="/self/profile" class="nav-link fc-white">{{ user.first_name }}</a>
+            <a href="/logout" class="nav-link fc-white">Logout</a>
+            {% endif %}
+        </li>
+
         <li class="nav-item"><a href="#" class="nav-link fc-white">Cart</a></li>
     </ul>
     </div>

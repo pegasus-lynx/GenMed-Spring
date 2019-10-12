@@ -1,0 +1,42 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h2 class="ft-rw"> Your Profile </h2>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section>
+        <h3 class="ft-lt"> General Info : </h3>
+        <table>
+            <tr>
+                <td> Email ID </td>
+                <td> {{ user.email_id }}</td>
+            </tr>
+            <tr>
+                <td> Name </td>
+                <td> {{ user.first_name}}{{user.last_name}}</td>
+            </tr>
+        </table>
+
+        <h3 class="ft-lt"> Addresses : </h3>
+        {% for row in addresses %}
+        <table>
+            <tr>
+                <td> Address Type </td>
+                <td> {{ row.address_type }}</td>
+            </tr>
+            <tr>
+                <td> Address </td>
+                <td> {{row.address.plot_no}},{{row.address.street}},{{row.address.city}},{{row.address.district}},{{row.address.state}}</td>
+            </tr>
+        </table>
+        {% endfor %}
+    </section>
+
+    <a href="/self/add_address">Add Address</a>
+    <a href="/self/add_phone">Add Phone</a>
+</div>
+{% endblock %}
