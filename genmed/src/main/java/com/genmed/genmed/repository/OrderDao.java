@@ -3,6 +3,7 @@ package com.genmed.genmed.repository;
 
 import com.genmed.genmed.model.ItemsOrdered;
 import com.genmed.genmed.model.Orders;
+import com.genmed.genmed.model.Reviews;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -54,5 +55,13 @@ public class OrderDao {
         });
         p.setItems(io);
         return p;
+    }
+
+    public List<ItemsOrdered> getItemsOrderedByOrderID(int order_id){
+        return null;
+    }
+
+    public List<Reviews> getReviewsByOrderID(int order_id){
+        return null;
     }
 }

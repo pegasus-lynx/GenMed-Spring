@@ -51,6 +51,18 @@ public class UserController {
         return "redirect:/self/profile";
     }
 
+    @GetMapping("/self/add_phone")
+    public String addPhone(Model model, Principal p){
+        return "userPhone";
+    }
+
+    @PostMapping("/self/add_phone")
+    public String addPhone(@RequestParam String phone_no, Principal p){
+        int user_id = userDao.getUserIDByEmailID(p.getName());
+        userDao.saveUserPhone(phone_no, user_id);
+        return "redirect:/self/profile";
+    }
+
 
     @GetMapping("/self/orders")
     public String userOrders(Model model, Principal p){
@@ -66,13 +78,15 @@ public class UserController {
     }
 
     @GetMapping("/self/order/{order_id}/add_review")
-    public String userOrderAddReview(Model model){
+    public String userOrderAddReview(Model model, @PathVariable int order_id){
+        model.addAttribute("order_id", order_id);
         model.addAttribute("reviews", new Reviews());
-        return "addReview";
+        return "userReview";
     }
 
     @PostMapping("/self/order/{order_id}/add_review")
-    public String userOrderAddReview(@ModelAttribute("reviews") Reviews reviews, @PathVariable int order_id) {
+    public String userOrderAddReview(@ModelAttribute("reviews") Reviews r, @PathVariable int order_id, Principal p) {
+        userDao.saveUserReview(r.getComment(), r.getRating(), r.getOrder_id());
         return "redirect:/user/order/"+order_id;
     }
 

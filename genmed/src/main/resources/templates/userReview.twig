@@ -9,16 +9,11 @@
 
 <div class="wrapper">
     <section id="about">
-        <form action="/self/add_address" method="POST" id="address_form">
-            <input type="text" placeholder="Plot Number" class="login-input" name="plot_no"/><br>
-            <input type="text" placeholder="Street" class="login-input" name="street"/><br>
-            <input type="text" placeholder="City" class="login-input" name="city"/><br>
-            <input type="text" placeholder="District" class="login-input" name="district"/><br>
-            <input type="text" placeholder="State" class="login-input" name="state"/><br>
-
-            <input type="hidden" name="order_id" value="{{  }}">
-
-            <input type="submit" value="Add Address" />
+        <form action="/self/order/{{ order_id }}/add_review" method="POST" id="review_form">
+            <input type="text" disabled name="order_id" value="{{ order_id }}">
+            <textarea name="comment" rows="5" cole="100">Comment here...</textarea>
+            <input type="range" min="1" max="5" value="3" name="rating" />
+            <input type="submit" value="Add Review" />
         </form>
     </section>
 </div>

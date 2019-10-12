@@ -25,10 +25,6 @@ public class UserDao {
         this.jt = jdbcTemplate;
     }
 
-    private enum AddressType {
-        Home, Work, Other
-    }
-
     public boolean userExists(String email_id) {
         String query = "select count(*) from user where email_id=?";
         int cnt = jt.queryForObject(query, Integer.class, email_id);
@@ -58,16 +54,6 @@ public class UserDao {
         jt.update(query, f_name, l_name, email_id, password, role);
     }
 
-    public void saveAddressOfUser(String address_type, Integer user_id, Integer address_id) {
-        String query = "insert into addressOfUser values (?,?,?)";
-
-        AddressType at;
-        if(address_type.equals("Home")) { at = AddressType.Home; }
-        else if(address_type == "Work") { at = AddressType.Work; }
-        else { at = AddressType.Other; }
-        jt.update(query, at, user_id, address_id);
-    }
-
     public void saveUserPhone(String phone_no, Integer user_id) {
         String query = "insert into userPhone values (?,?)";
         jt.update(query, phone_no, user_id);
@@ -79,12 +65,12 @@ public class UserDao {
     }
 
     public void saveUserReview(String comment, Double rating, Integer order_id) {
-        String query = "insert into Reviews(comment, rating, order_id) values (?,?,?)";
+        String query = "insert into reviews(comment, rating, order_id) values (?,?,?)";
         jt.update(query, comment, rating, order_id);
     }
 
     public void deleteUserReview(Integer review_id) {
-        String query = "delete from Review where review_id=?";
+        String query = "delete from reviews where review_id=?";
         jt.update(query, review_id);
     }
 
