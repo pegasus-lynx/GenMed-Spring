@@ -1,18 +1,15 @@
 package com.genmed.genmed.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 public class Orders {
 
-    enum OrderStatus {
-        Ordered, Dispatched, Delivered, Returned, Cancelled;
-    }
-
     private Integer order_id;
-    private OrderStatus status;
+    private String status;
     private Date order_date;
-    private Double bill_amount;
+    private BigDecimal bill_amount;
     private Integer shop_id;
     private Integer user_id;
 
@@ -26,11 +23,11 @@ public class Orders {
         this.order_id = order_id;
     }
 
-    public OrderStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -42,11 +39,11 @@ public class Orders {
         this.order_date = order_date;
     }
 
-    public Double getBill_amount() {
+    public BigDecimal getBill_amount() {
         return bill_amount;
     }
 
-    public void setBill_amount(Double bill_amount) {
+    public void setBill_amount(BigDecimal bill_amount) {
         this.bill_amount = bill_amount;
     }
 

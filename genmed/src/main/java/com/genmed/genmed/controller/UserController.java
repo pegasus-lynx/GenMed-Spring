@@ -5,6 +5,7 @@ import com.genmed.genmed.model.Address;
 import com.genmed.genmed.model.Reviews;
 import com.genmed.genmed.model.Shop;
 import com.genmed.genmed.repository.AddressDao;
+import com.genmed.genmed.repository.OrderDao;
 import com.genmed.genmed.repository.ShopDao;
 import com.genmed.genmed.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class UserController {
 
     @Autowired
     private AddressDao addressDao;
+
+    @Autowired
+    private OrderDao orderDao;
 
     @RequestMapping("/self/profile")
     public String userProfile(Model model, Principal p) {
@@ -51,14 +55,14 @@ public class UserController {
     @GetMapping("/self/orders")
     public String userOrders(Model model, Principal p){
         int user_id = userDao.getUserIDByEmailID(p.getName());
-//        model.addAttribute("orders", userDao.getOrdersByUserID(user_id));
+        model.addAttribute("orders", userDao.getOrdersByUserID(user_id));
         return "userOrders";
     }
 
     @RequestMapping("/self/order/{order_id}")
-    public String userOrderDetail(Model model){
-//        model.addAttribute("order", userDao.getOrderByID(order_id));
-        return "userOrderDetail";
+    public String userOrderDetail(Model model, @PathVariable int order_id){
+        model.addAttribute("order", orderDao.getOrderByID(order_id));
+        return "userOrdersDetail";
     }
 
     @GetMapping("/self/order/{order_id}/add_review")

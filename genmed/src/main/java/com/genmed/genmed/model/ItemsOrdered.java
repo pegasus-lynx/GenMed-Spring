@@ -1,8 +1,10 @@
 package com.genmed.genmed.model;
 
+import java.math.BigDecimal;
+
 public class ItemsOrdered {
     private Integer quantity;
-    private Double amount;
+    private BigDecimal price;
     private String item_name;
     private Integer batch_id;
 
@@ -14,12 +16,12 @@ public class ItemsOrdered {
         this.quantity = quantity;
     }
 
-    public Double getAmount() {
-        return amount;
+    public BigDecimal getAmount() {
+        return price;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getItem_name() {

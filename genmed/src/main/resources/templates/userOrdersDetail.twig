@@ -1,0 +1,48 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h2 class="ft-rw"> Order Details </h2>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section>
+        <h3 class="ft-lt"> Order Info : </h3>
+        <table>
+            <tr>
+                <td> Order ID </td>
+                <td> {{ order.order_id }}</td>
+            </tr>
+            <tr>
+                <td> Order Status </td>
+                <td> {{ order.order_status }}</td>
+            </tr>
+            <tr>
+                <td> Order Date </td>
+                <td> {{ order.order_date}} </td>
+            </tr>
+            <tr>
+                <td> Bill Amount </td>
+                <td> {{ order.bill_amount }} </td>
+            </tr>
+        </table>
+
+        <h3 class="ft-lt"> Items Ordered : </h3>
+        <table>
+            {% for row in order.items %}
+            <tr>
+                <td> {{ row.batch_id }}</td>
+                <td> {{ row.quantity }}</td>
+                <td> {{ row.price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+
+    <a href="/self/order/{{ order.order_id }}/add_review">Add Review</a>
+    <a href="#"> Cancel </a>
+    <a href="#"> Mark Delivered </a>
+</div>
+{% endblock %}

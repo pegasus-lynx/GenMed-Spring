@@ -1,0 +1,26 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Add Review for the Order </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section id="about">
+        <form action="/self/add_address" method="POST" id="address_form">
+            <input type="text" placeholder="Plot Number" class="login-input" name="plot_no"/><br>
+            <input type="text" placeholder="Street" class="login-input" name="street"/><br>
+            <input type="text" placeholder="City" class="login-input" name="city"/><br>
+            <input type="text" placeholder="District" class="login-input" name="district"/><br>
+            <input type="text" placeholder="State" class="login-input" name="state"/><br>
+
+            <input type="hidden" name="order_id" value="{{  }}">
+
+            <input type="submit" value="Add Address" />
+        </form>
+    </section>
+</div>
+{% endblock %}
+

@@ -1,7 +1,9 @@
 package com.genmed.genmed.repository;
 
+import com.genmed.genmed.model.Orders;
 import com.genmed.genmed.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Transactional
 @Repository
@@ -102,6 +105,23 @@ public class UserDao {
                 u.setEmail_id(row.getString("email_id"));
                 u.setPassword(row.getString("password"));
                 return u;
+            }
+        });
+    }
+
+    public List<Orders> getOrdersByUserID(int user_id){
+        String query = "select * from orders where user_id="+user_id;
+        return jt.query(query, new RowMapper<Orders>() {
+            @Override
+            public Orders mapRow(ResultSet r, int i) throws SQLException {
+                Orders o = new Orders();
+                o.setOrder_id(r.getInt("order_id"));
+                o.setOrder_date(r.getDate("order_date"));
+                o.setBill_amount(r.getBigDecimal("bill_amount"));
+                o.setStatus(r.getString("order_status"));
+                o.setShop_id(r.getInt("shop_id"));
+                o.setUser_id(r.getInt("user_id"));
+                return o;
             }
         });
     }
