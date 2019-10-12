@@ -1,0 +1,56 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h3 class="ft-rw">Shop Detail</h3>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section>
+        <h2 class="sec_title ft-rw">{{ shop.shop_name }}</h2>
+        <table>
+            <tr>
+                <td> Name </td>
+                <td> {{ shop.shop_name }}</td>
+            </tr>
+            <tr>
+                <td> Email ID </td>
+                <td> {{ shop.email_id }}</td>
+            </tr>
+            <tr>
+                <td> License No. </td>
+                <td> {{ shop.license }}</td>
+            </tr>
+        </table>
+
+        <h3 class="sec_title ft-rw"> Address Details : </h3>
+        <table>
+            <tr>
+                <td> Plot No.</td>
+                <td>{{ address.plot_no }}</td>
+            </tr>
+            <tr>
+                <td>Street </td>
+                <td>{{ address.street }}</td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>{{ address.city }}</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>{{ address.district }}</td>
+            </tr>
+            <tr>
+                <td>State</td>
+                <td>{{ address.state }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <a href="/order/shop/{{shop_id}}"> Order from shop </a>
+    <a href="/shop/{{ shop_id}}/inventory"> View Inventory </a>
+</div>
+{% endblock %}

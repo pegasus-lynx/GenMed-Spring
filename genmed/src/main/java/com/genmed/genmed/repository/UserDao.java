@@ -111,4 +111,9 @@ public class UserDao {
             }
         });
     }
+
+    public void changeRoleToShop(int user_id){
+        String query = "update user set role='shop' where user_id="+user_id;
+        jt.update(query);
+    }
 }

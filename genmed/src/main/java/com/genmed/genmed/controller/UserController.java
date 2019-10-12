@@ -90,17 +90,25 @@ public class UserController {
         return "redirect:/user/order/"+order_id;
     }
 
-    // Consult before doing this part of the project
-
     @GetMapping("/self/add_shop")
     public String addShop(Model model, Principal p) {
         model.addAttribute("shop", new Shop());
-        return "addShop";
+        model.addAttribute("address", new Address());
+        return "createShop";
     }
 
     @PostMapping("/self/add_shop")
-    public String addShop(@ModelAttribute("shop") Shop shop, Principal p) {
-        return "redirect:/user/profile";
+    public String addShop(@ModelAttribute("shop") Shop s, @ModelAttribute("address") Address a, Principal p) {
+
+        int address_id = addressDao.saveAddress(a.getPlot_no(), a.getStreet(), a.getCity(), a.getDistrict(), a.getState(), a.getLatitude(), a.getLongitude());
+        int shop_id = shopDao.save(s.getShop_name(), s.getEmail_id(), s.getLicense(), address_id);
+        int user_id = userDao.getUserIDByEmailID(p.getName());
+
+        // Include code for checking if the same address is present in the database
+
+        shopDao.addOwner(user_id, shop_id);
+        userDao.changeRoleToShop(user_id);
+        return "redirect:/self/accounts";
     }
 
 }

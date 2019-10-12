@@ -1,0 +1,27 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h2 class="ft-rw"> Marketplace </h2>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section>
+        <h2 class="sec_title ft-rw">List of All Shops</h2>
+        <table>
+            <tr>
+                <th> Shop Name </th>
+                <th> Link to shop </th>
+            </tr>
+            {% for row in shops %}
+            <tr>
+                <td> {{ row.shop_name }}</td>
+                <td> <a href="/shop/{{ row.shop_id }}">Link</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</div>
+{% endblock %}

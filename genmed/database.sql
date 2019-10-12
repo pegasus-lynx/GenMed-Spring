@@ -81,9 +81,7 @@ CREATE TABLE shop
 (
   shop_id INT NOT NULL AUTO_INCREMENT,
   shop_name VARCHAR(64) NOT NULL,
-  email_id VARCHAR(48) NOT NULL,
   license VARCHAR(10) NOT NULL,
-  shop_login_pin VARCHAR(10) NOT NULL,
   address_id INT NOT NULL,
   PRIMARY KEY (shop_id),
   FOREIGN KEY (address_id) REFERENCES address(address_id)
@@ -92,7 +90,7 @@ CREATE TABLE shop
 CREATE TABLE shopInventory
 (
   item_id INT NOT NULL AUTO_INCREMENT,
-  quanity INT NOT NULL,
+  quantity INT NOT NULL,
   shop_id INT NOT NULL,
   batch_id INT NOT NULL,
   PRIMARY KEY (item_id),
@@ -121,7 +119,7 @@ CREATE TABLE shopPhone
   FOREIGN KEY (shop_id) REFERENCES shop(shop_id)
 );
 
-CREATE TABLE genericDrugCmposition
+CREATE TABLE genericDrugComposition
 (
   percent NUMERIC(4,2) NOT NULL,
   gen_id INT NOT NULL,
