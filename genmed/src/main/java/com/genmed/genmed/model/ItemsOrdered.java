@@ -7,6 +7,7 @@ public class ItemsOrdered {
     private BigDecimal price;
     private String item_name;
     private Integer batch_id;
+    private Integer item_id;
 
     public Integer getQuantity() {
         return quantity;
@@ -38,5 +39,13 @@ public class ItemsOrdered {
 
     public void setBatch_id(Integer batch_id) {
         this.batch_id = batch_id;
+    }
+
+    public Integer getItem_id() {
+        return item_id;
+    }
+
+    public void setItem_id(Integer item_id) {
+        this.item_id = item_id;
     }
 }

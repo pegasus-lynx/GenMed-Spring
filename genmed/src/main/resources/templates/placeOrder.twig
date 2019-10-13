@@ -9,7 +9,7 @@
 
 <div class="wrapper">
     <section id="about">
-        <form action="/account/{{ shop_id }}/inventory/add" method="POST" id="inventory_form">
+        <form action="/self/shop/{{shop_id}}/order" method="POST" id="order_form">
             <select name="drug_id" id="drug_name" onchange="getBatchNo()">
                 {% for row in drugs %}
                 <option value="{{ row.drug_id }}">{{ row.name }}</option>

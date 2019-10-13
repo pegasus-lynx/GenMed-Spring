@@ -1,17 +1,17 @@
 package com.genmed.genmed.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 public class Orders {
 
     private Integer order_id;
     private String status;
-    private Date order_date;
+    private String order_date;
     private BigDecimal bill_amount;
     private Integer shop_id;
     private Integer user_id;
+    private String order_time;
 
     private List<ItemsOrdered> items;
 
@@ -31,11 +31,11 @@ public class Orders {
         this.status = status;
     }
 
-    public Date getOrder_date() {
+    public String getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(String order_date) {
         this.order_date = order_date;
     }
 
@@ -69,5 +69,13 @@ public class Orders {
 
     public void setItems(List<ItemsOrdered> items) {
         this.items = items;
+    }
+
+    public String getOrder_time() {
+        return order_time;
+    }
+
+    public void setOrder_time(String order_time) {
+        this.order_time = order_time;
     }
 }

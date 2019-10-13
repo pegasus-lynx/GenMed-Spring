@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class AccountController {
@@ -99,6 +100,7 @@ public class AccountController {
             return "redirect:/self/shops";
 
         m.addAttribute("shop_id", shop_id);
+        m.addAttribute("drugs", drugDao.listAllDrugs());
         m.addAttribute("item", new ShopInventory());
         return "addInventory";
     }
@@ -116,7 +118,14 @@ public class AccountController {
 
     @GetMapping("/account/add_drug")
     public String addDrug(Model m, Principal p) {
+
+        User u = userDao.findByUsername(p.getName());
+        if(!"shop".equals(u.getRole()))
+            return "redirect:/self/shops";
+
         m.addAttribute("drug", new Drugs());
+        List<GenericDrug> gen_drugs = drugDao.listAllGenDrugs();
+        m.addAttribute("gen_drugs", gen_drugs);
         return "addDrug";
     }
 
@@ -135,8 +144,7 @@ public class AccountController {
     public String addDrugBatch(Model m, Principal p, @PathVariable int shop_id){
 
         User u = userDao.findByUsername(p.getName());
-        m.addAttribute("user", u);
-        if(!shopDao.isOwner(u.getUser_id(), shop_id))
+        if(!"shop".equals(u.getRole()))
             return "redirect:/self/shops";
 
         m.addAttribute("shop_id", shop_id);

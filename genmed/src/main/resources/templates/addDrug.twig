@@ -13,17 +13,16 @@
             <input type="text" placeholder="Name"  name="name"/><br>
             <input type="text" placeholder="Manufacturer Name"  name="mf_name"/><br>
 
-            <input type="checkbox" placeholder="Is Generic ?">
-
-            <input type="text" placeholder="Gen Drug"  name="gen_name"/><br>
-            <input type="hidden" name="gen_id" />
-
+            <input type="checkbox" name="is_generic" value="1">Is Generic ?</input>
+            <br>
+            <select name="gen_id" id="gen_name">
+                {% for row in gen_drugs %}
+                    <option value="{{ row.gen_id }}">{{ row.name }}</option>
+                {% endfor %}
+            </select>
             <input type="submit" value="Add Drug" />
         </form>
     </section>
 </div>
-
-<script>
-</script>
 {% endblock %}
 

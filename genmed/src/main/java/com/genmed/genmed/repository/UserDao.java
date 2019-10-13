@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 @Transactional
 @Repository
 public class UserDao {
@@ -28,6 +31,9 @@ public class UserDao {
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jt = jdbcTemplate;
     }
+
+    private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    private DateFormat tf = new SimpleDateFormat("HH:mm:ss");
 
     public boolean userExists(String email_id) {
         String query = "select count(*) from user where email_id=?";
@@ -107,7 +113,8 @@ public class UserDao {
             public Orders mapRow(ResultSet r, int i) throws SQLException {
                 Orders o = new Orders();
                 o.setOrder_id(r.getInt("order_id"));
-                o.setOrder_date(r.getDate("order_date"));
+                o.setOrder_date(df.format(r.getDate("order_date")));
+                o.setOrder_time(tf.format(r.getTime("order_time")));
                 o.setBill_amount(r.getBigDecimal("bill_amount"));
                 o.setStatus(r.getString("order_status"));
                 o.setShop_id(r.getInt("shop_id"));

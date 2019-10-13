@@ -119,4 +119,31 @@ public class DrugDao {
         String query = "insert into drugs(name, mf_name, is_generic, gen_id) values (?,?,?,?)";
         jt.update(query, name, mf_name, is_generic, gen_id);
     }
+
+    public List<String> getMfNameByIsGen(int is_gen){
+        String query = "select distinct mf_name from drugs where is_generic="+is_gen;
+        List<String> res = new ArrayList<String>();
+        List<Map<String,Object>> rs = jt.queryForList(query);
+        for( Map<String,Object> r:rs ) {
+            String s = (String) r.get("mf_name");
+            res.add(s);
+        }
+        return res;
+    }
+
+    public List<String> getDrugNameByOther(int is_gen, String mf_name){
+        String query = "select distinct name from drugs where is_generic=? and mf_name=?";
+        List<String> res = new ArrayList<String>();
+        List<Map<String,Object>> rs = jt.queryForList(query, is_gen, mf_name);
+        for( Map<String,Object> r:rs ) {
+            String s = (String) r.get("name");
+            res.add(s);
+        }
+        return res;
+    }
+
+    public int getDrugIDByOther(int is_gen, String mf_name, String drug_name){
+        String query = "select drug_id from drugs where is_generic=? and mf_name=? and name=?";
+        return jt.queryForObject(query, new Object[]{is_gen, mf_name, drug_name}, Integer.class);
+    }
 }
