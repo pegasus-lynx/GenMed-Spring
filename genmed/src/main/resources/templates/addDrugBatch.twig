@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Add Drug Batch </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section id="about">
+        <form action="/account/{{ shop_id }}/add_drug_batch" method="POST" id="drug_batch_form">
+            <input type="text" placeholder="Batch No"  name="batch_no"/><br>
+
+            <input type="date" placeholder="MFG DATE"  name="mfg_date"/><br>
+            <input type="date" placeholder="EXP DATE"  name="exp_date"/><br>
+
+            <input type="text" placeholder="Drug Name"  name="drug_name"/><br>
+            <input type="text" placeholder="Manufacturer Name"  name="mf_name"/><br>
+            <input type="hidden" name="drug_id" />
+
+            <input type="submit" value="Add Drug Batch" />
+        </form>
+    </section>
+</div>
+
+<script>
+</script>
+{% endblock %}
+

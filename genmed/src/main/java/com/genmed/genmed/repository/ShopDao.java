@@ -40,7 +40,7 @@ public class ShopDao {
     }
 
     public void saveShopPhone(String phone_no, Integer shop_id) {
-        String query = "insert into userPhone values (?,?)";
+        String query = "insert into shopPhone values (?,?)";
         jt.update(query, phone_no, shop_id);
     }
 

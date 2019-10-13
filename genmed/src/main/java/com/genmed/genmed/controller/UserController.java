@@ -35,7 +35,7 @@ public class UserController {
     public String userProfile(Model model, Principal p) {
         int user_id = userDao.getUserIDByEmailID(p.getName());
         model.addAttribute("user", userDao.getUserDetailByID(user_id));
-        model.addAttribute("addresses", addressDao.getAddressesByID(user_id));
+        model.addAttribute("addresses", addressDao.getAddressesByUserID(user_id));
         return "userProfile";
     }
 

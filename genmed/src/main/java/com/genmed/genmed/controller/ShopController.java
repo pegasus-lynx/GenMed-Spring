@@ -35,7 +35,7 @@ public class ShopController {
     public String viewShopDetail(Model m, @PathVariable int shop_id, Principal p){
         Shop s = shopDao.getShopByID(shop_id);
         m.addAttribute("shop", s);
-        m.addAttribute("address", addressDao.getAddressesByID(s.getAddress_id()));
+        m.addAttribute("address", addressDao.getAddressByID(s.getAddress_id()));
         m.addAttribute("user", userDao.findByUsername(p.getName()));
         return "shopDetail";
     }

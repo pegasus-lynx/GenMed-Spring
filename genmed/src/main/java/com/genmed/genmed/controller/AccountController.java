@@ -36,8 +36,10 @@ public class AccountController {
             return "redirect:/self/shops";
 
         Shop s = shopDao.getShopByID(shop_id);
+        System.out.println(s.getAddress_id());
         m.addAttribute("shop", s);
-        m.addAttribute("address", addressDao.getAddressesByID(s.getAddress_id()));
+        Address a = addressDao.getAddressByID(s.getAddress_id());
+        m.addAttribute("address", a);
         return "accountProfile";
     }
 
@@ -46,6 +48,7 @@ public class AccountController {
 
         User u = userDao.findByUsername(p.getName());
         m.addAttribute("user", u);
+        m.addAttribute("shop_id", shop_id);
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
         return "accountPhone";
@@ -95,6 +98,7 @@ public class AccountController {
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
+        m.addAttribute("shop_id", shop_id);
         m.addAttribute("item", new ShopInventory());
         return "addInventory";
     }
@@ -135,6 +139,7 @@ public class AccountController {
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
+        m.addAttribute("shop_id", shop_id);
         m.addAttribute("drugBatch", new DrugBatch());
         return "addDrugBatch";
     }

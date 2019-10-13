@@ -1,0 +1,33 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h2 class="ft-rw"> FeedBacks </h2>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section>
+        <h2 class="sec_title ft-rw">List of All FeedBacks</h2>
+        {% if shops is not null %}
+        <table>
+            <tr>
+                <th> Sl. No. </th>
+                <th> Comment </th>
+                <th> Rating </th>
+                <th> Link </th>
+            </tr>
+            {% for row in shops %}
+            <tr>
+                <td> {{ loop.index }}</td>
+                <td> {{ row.comment }}</td>
+                <td> {{ row.rating }}</td>
+                <td> <a href="/order/{{ row.order_id }}">Link</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

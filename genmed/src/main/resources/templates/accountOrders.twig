@@ -1,0 +1,38 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Account Orders </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+        <section>
+            <table>
+                <tr>
+                    <th> Sl. No. </th>
+                    <th> Order ID </th>
+                    <th> Order Date </th>
+                    <th> Order Status </th>
+                    <th> Bill Amount </th>
+                    <th> </th>
+                </tr>
+                {% for row in orders %}
+                <tr>
+                    <td></td>
+                    <td><a href="/self/order/{{ row.order_id }}">{{ row.order_id }}</a> </td>
+                    <td> {{ row.order_date }}</td>
+                    <td> {{ row.order_status }}</td>
+                    <td> {{ row.bill_amount }}</td>
+                    <td><a href="#">Mark Processing</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+</div>
+
+<script>
+</script>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Create Shop </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section id="about">
+        <form action="/account/{{ shop_id }}/inventory/add" method="POST" id="inventory_form">
+            <input type="text" placeholder="Drug"  name="drug_name"/><br>
+            <input type="hidden" name="drug_id" />
+
+            <input type="text" placeholder="Batch No" name="batch_no" /><br>
+            <input type="hidden" name="batch_id" />
+
+            <input type="text" placeholder="Quantity"  name="quantity"/><br>
+            <input type="text" placeholder="Price"  name="price"/><br>
+            <input type="submit" value="Add Item" />
+        </form>
+    </section>
+</div>
+
+<script>
+</script>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Create Shop </h1>
+    </div>
+</header>
+
+<div class="wrapper">
+    <section id="about">
+        <form action="/account/add_drug" method="POST" id="drug_form">
+            <input type="text" placeholder="Name"  name="name"/><br>
+            <input type="text" placeholder="Manufacturer Name"  name="mf_name"/><br>
+
+            <input type="checkbox" placeholder="Is Generic ?">
+
+            <input type="text" placeholder="Gen Drug"  name="gen_name"/><br>
+            <input type="hidden" name="gen_id" />
+
+            <input type="submit" value="Add Drug" />
+        </form>
+    </section>
+</div>
+
+<script>
+</script>
+{% endblock %}
+

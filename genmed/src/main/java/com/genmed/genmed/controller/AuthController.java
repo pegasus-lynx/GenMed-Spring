@@ -64,6 +64,6 @@ public class AuthController {
         if ("user".equals(user.getRole()))
             return "redirect:/self/profile";
         else
-            return "redirect:/account/shop";
+            return "redirect:/self/shops";
     }
 }

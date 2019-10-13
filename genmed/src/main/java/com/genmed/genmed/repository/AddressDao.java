@@ -4,10 +4,13 @@ import com.genmed.genmed.model.Address;
 import com.genmed.genmed.model.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +40,7 @@ public class AddressDao {
         jt.update(query, address_type,user_id,address_id);
     }
 
-    public List<UserAddress> getAddressesByID(int user_id){
+    public List<UserAddress> getAddressesByUserID(int user_id){
         String query = "select * from addressOfUser as au, address as a where a.address_id=au.address_id and au.user_id="+user_id;
         List<Map<String,Object>> rs = jt.queryForList(query);
         List<UserAddress> res = new ArrayList<UserAddress>();
@@ -57,5 +60,24 @@ public class AddressDao {
             res.add(u);
         }
         return res;
+    }
+
+    public Address getAddressByID(int address_id){
+        String query = "select * from address where address_id="+address_id;
+        return jt.queryForObject(query, new RowMapper<Address>() {
+            @Override
+            public Address mapRow(ResultSet r, int i) throws SQLException {
+                Address a = new Address();
+                a.setAddress_id(r.getInt("address_id"));
+                a.setLatitude(r.getBigDecimal("latitude"));
+                a.setLongitude(r.getBigDecimal("longitude"));
+                a.setPlot_no(r.getString("plot_no"));
+                a.setStreet(r.getString("street"));
+                a.setCity(r.getString("city"));
+                a.setDistrict(r.getString("district"));
+                a.setState(r.getString("state"));
+                return a;
+            }
+        });
     }
 }
