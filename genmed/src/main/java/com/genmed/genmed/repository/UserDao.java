@@ -1,6 +1,7 @@
 package com.genmed.genmed.repository;
 
 import com.genmed.genmed.model.Orders;
+import com.genmed.genmed.model.Shop;
 import com.genmed.genmed.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -9,9 +10,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Repository
@@ -38,6 +42,7 @@ public class UserDao {
 
             public User mapRow(ResultSet row, int i) throws SQLException {
                 User u = new User();
+                u.setUser_id(row.getInt("user_id"));
                 u.setEmail_id(row.getString("email_id"));
                 u.setFirst_name(row.getString("first_name"));
                 u.setLast_name(row.getString("last_name"));
@@ -64,7 +69,7 @@ public class UserDao {
         jt.update(query, phone_no, user_id);
     }
 
-    public void saveUserReview(String comment, Double rating, Integer order_id) {
+    public void saveUserReview(String comment, BigDecimal rating, Integer order_id) {
         String query = "insert into reviews(comment, rating, order_id) values (?,?,?)";
         jt.update(query, comment, rating, order_id);
     }
@@ -115,5 +120,18 @@ public class UserDao {
     public void changeRoleToShop(int user_id){
         String query = "update user set role='shop' where user_id="+user_id;
         jt.update(query);
+    }
+
+    public List<Shop> getShopsOfUser(int user_id) {
+        String query = "select s.shop_name, s.shop_id from shop s,owner o where s.shop_id=o.shop_id and o.user_id="+user_id;
+        List<Shop> res = new ArrayList<Shop>();
+        List<Map<String,Object>> rs = jt.queryForList(query);
+        for ( Map<String, Object> r:rs) {
+            Shop s = new Shop();
+            s.setShop_name((String) r.get("shop_name"));
+            s.setShop_id((int) r.get("shop_id"));
+            res.add(s);
+        }
+        return res;
     }
 }

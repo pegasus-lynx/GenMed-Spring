@@ -114,4 +114,9 @@ public class DrugDao {
         }
         return res;
     }
+
+    public void saveDrug(String name, String mf_name, int is_generic, int gen_id){
+        String query = "insert into drugs(name, mf_name, is_generic, gen_id) values (?,?,?,?)";
+        jt.update(query, name, mf_name, is_generic, gen_id);
+    }
 }

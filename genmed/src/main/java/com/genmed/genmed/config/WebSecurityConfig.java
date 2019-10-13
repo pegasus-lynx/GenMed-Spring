@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
 
-        http.authorizeRequests().antMatchers("/self", "/self/**").access("hasAnyAuthority('owner')");
+        http.authorizeRequests().antMatchers("/self", "/self/**").access("hasAnyAuthority('user')");
 
         http.authorizeRequests().antMatchers("/account", "/account/**").access("hasAuthority('shop')");
 

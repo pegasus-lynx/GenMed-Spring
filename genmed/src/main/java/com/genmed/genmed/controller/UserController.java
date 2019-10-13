@@ -4,6 +4,7 @@ package com.genmed.genmed.controller;
 import com.genmed.genmed.model.Address;
 import com.genmed.genmed.model.Reviews;
 import com.genmed.genmed.model.Shop;
+import com.genmed.genmed.model.User;
 import com.genmed.genmed.repository.AddressDao;
 import com.genmed.genmed.repository.OrderDao;
 import com.genmed.genmed.repository.ShopDao;
@@ -108,7 +109,15 @@ public class UserController {
 
         shopDao.addOwner(user_id, shop_id);
         userDao.changeRoleToShop(user_id);
-        return "redirect:/self/accounts";
+        return "redirect:/self/shops";
+    }
+
+    @RequestMapping("/self/shops")
+    public String selfShops(Model model, Principal p){
+        User u = userDao.findByUsername(p.getName());
+        model.addAttribute("user", u);
+        model.addAttribute("shops", userDao.getShopsOfUser(u.getUser_id()));
+        return "userShops";
     }
 
 }

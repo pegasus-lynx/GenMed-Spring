@@ -64,4 +64,35 @@ public class OrderDao {
     public List<Reviews> getReviewsByOrderID(int order_id){
         return null;
     }
+
+    public List<Reviews> getReviewsForShopID(int shop_id){
+        String query = "select * from reviews where order_id in ( select order_id from orders where shop_id="+shop_id+')';
+        return jt.query(query, new RowMapper<Reviews>() {
+            @Override
+            public Reviews mapRow(ResultSet row, int i) throws SQLException {
+                Reviews r = new Reviews();
+                r.setComment(row.getString("comment"));
+                r.setRating(row.getBigDecimal("rating"));
+                r.setOrder_id(row.getInt("order_id"));
+                return r;
+            }
+        });
+    }
+
+    public List<Orders> getOrdersByShopID(int shop_id){
+        String query = "select * from orders where shop_id"+shop_id;
+        return jt.query(query, new RowMapper<Orders>() {
+            @Override
+            public Orders mapRow(ResultSet r, int i) throws SQLException {
+                Orders o = new Orders();
+                o.setOrder_id(r.getInt("order_id"));
+                o.setOrder_date(r.getDate("order_date"));
+                o.setBill_amount(r.getBigDecimal("bill_amount"));
+                o.setStatus(r.getString("order_status"));
+                o.setShop_id(r.getInt("shop_id"));
+                o.setUser_id(r.getInt("user_id"));
+                return o;
+            }
+        });
+    }
 }

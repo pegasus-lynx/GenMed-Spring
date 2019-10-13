@@ -8,8 +8,9 @@ public class DrugBatch {
     private String batch_no;
     private Date mfg_date;
     private Date exp_date;
-    private Double price;
+
     private int drug_id;
+    private Drugs drug;
 
     public int getBatch_id() {
         return batch_id;
@@ -43,19 +44,19 @@ public class DrugBatch {
         this.exp_date = exp_date;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public int getDrug_id() {
         return drug_id;
     }
 
     public void setDrug_id(int drug_id) {
         this.drug_id = drug_id;
+    }
+
+    public Drugs getDrug() {
+        return drug;
+    }
+
+    public void setDrug(Drugs drug) {
+        this.drug = drug;
     }
 }

@@ -1,9 +1,11 @@
 package com.genmed.genmed.model;
 
+import java.math.BigDecimal;
+
 public class Reviews {
 
     private String comment;
-    private Double rating;
+    private BigDecimal rating;
     private Integer review_id;
     private Integer order_id;
     private Integer user_id;
@@ -16,11 +18,11 @@ public class Reviews {
         this.comment = comment;
     }
 
-    public Double getRating() {
+    public BigDecimal getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(BigDecimal rating) {
         this.rating = rating;
     }
 

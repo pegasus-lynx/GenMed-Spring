@@ -70,7 +70,6 @@ CREATE TABLE drugBatch
   batch_no INT NOT NULL,
   mfg_date DATE NOT NULL,
   exp_date DATE NOT NULL,
-  price NUMERIC(8,2) NOT NULL,
   batch_id INT NOT NULL AUTO_INCREMENT,
   drug_id INT NOT NULL,
   PRIMARY KEY (batch_id),
@@ -93,6 +92,7 @@ CREATE TABLE shopInventory
   quantity INT NOT NULL,
   shop_id INT NOT NULL,
   batch_id INT NOT NULL,
+  price NUMERIC(8,2) NOT NULL,
   PRIMARY KEY (item_id),
   FOREIGN KEY (shop_id) REFERENCES shop(shop_id),
   FOREIGN KEY (batch_id) REFERENCES drugBatch(batch_id)

@@ -32,7 +32,7 @@ public class ShopController {
     }
 
     @RequestMapping(value = "/shop/{shop_id}")
-    public String viewShopDetail(Model m, @PathVariable("shop_id") int shop_id, Principal p){
+    public String viewShopDetail(Model m, @PathVariable int shop_id, Principal p){
         Shop s = shopDao.getShopByID(shop_id);
         m.addAttribute("shop", s);
         m.addAttribute("address", addressDao.getAddressesByID(s.getAddress_id()));
@@ -40,10 +40,10 @@ public class ShopController {
         return "shopDetail";
     }
 
-//    @RequestMapping(value = "/shop/{shop_id}/inventory")
-//    public String viewShopInventory(Model m, Principal p, @PathVariable int shop_id){
-//        m.addAttribute("items", shopDao.getInventoryByID(shop_id));
-//        m.addAttribute("user", userDao.findByUsername(p.getName()));
-//        return "shopInventory";
-//    }
+    @RequestMapping(value = "/shop/{shop_id}/inventory")
+    public String viewShopInventory(Model m, Principal p, @PathVariable int shop_id){
+        m.addAttribute("items", shopDao.getInventoryByID(shop_id));
+        m.addAttribute("user", userDao.findByUsername(p.getName()));
+        return "shopInventory";
+    }
 }
