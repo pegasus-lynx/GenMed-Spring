@@ -39,16 +39,18 @@ public class UserController {
     private DateFormat tf = new SimpleDateFormat("HH:mm:ss");
 
     @RequestMapping("/self/profile")
-    public String userProfile(Model model, Principal p) {
+    public String userProfile(Model m, Principal p) {
         int user_id = userDao.getUserIDByEmailID(p.getName());
-        model.addAttribute("user", userDao.getUserDetailByID(user_id));
-        model.addAttribute("addresses", addressDao.getAddressesByUserID(user_id));
+        m.addAttribute("user", userDao.getUserDetailByID(user_id));
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("addresses", addressDao.getAddressesByUserID(user_id));
         return "userProfile";
     }
 
     @GetMapping("/self/add_address")
-    public String addAddress(Model model, Principal p) {
-        model.addAttribute("address", new Address());
+    public String addAddress(Model m, Principal p) {
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("address", new Address());
         return "userAddress";
     }
 
@@ -60,7 +62,8 @@ public class UserController {
     }
 
     @GetMapping("/self/add_phone")
-    public String addPhone(Model model, Principal p){
+    public String addPhone(Model m, Principal p){
+        m.addAttribute("user_email", p.getName());
         return "userPhone";
     }
 
@@ -73,22 +76,25 @@ public class UserController {
 
 
     @GetMapping("/self/orders")
-    public String userOrders(Model model, Principal p){
+    public String userOrders(Model m, Principal p){
         int user_id = userDao.getUserIDByEmailID(p.getName());
-        model.addAttribute("orders", userDao.getOrdersByUserID(user_id));
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("orders", userDao.getOrdersByUserID(user_id));
         return "userOrders";
     }
 
     @RequestMapping("/self/order/{order_id}")
-    public String userOrderDetail(Model model, @PathVariable int order_id){
-        model.addAttribute("order", orderDao.getOrderByID(order_id));
+    public String userOrderDetail(Model m, Principal p,@PathVariable int order_id){
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("order", orderDao.getOrderByID(order_id));
         return "userOrdersDetail";
     }
 
     @GetMapping("/self/order/{order_id}/add_review")
-    public String userOrderAddReview(Model model, @PathVariable int order_id){
-        model.addAttribute("order_id", order_id);
-        model.addAttribute("reviews", new Reviews());
+    public String userOrderAddReview(Model m, Principal p, @PathVariable int order_id){
+        m.addAttribute("order_id", order_id);
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("reviews", new Reviews());
         return "userReview";
     }
 
@@ -99,9 +105,10 @@ public class UserController {
     }
 
     @GetMapping("/self/add_shop")
-    public String addShop(Model model, Principal p) {
-        model.addAttribute("shop", new Shop());
-        model.addAttribute("address", new Address());
+    public String addShop(Model m, Principal p) {
+        m.addAttribute("shop", new Shop());
+        m.addAttribute("address", new Address());
+        m.addAttribute("user_email", p.getName());
         return "createShop";
     }
 
@@ -120,10 +127,11 @@ public class UserController {
     }
 
     @RequestMapping("/self/shops")
-    public String selfShops(Model model, Principal p){
+    public String selfShops(Model m, Principal p){
         User u = userDao.findByUsername(p.getName());
-        model.addAttribute("user", u);
-        model.addAttribute("shops", userDao.getShopsOfUser(u.getUser_id()));
+        m.addAttribute("user", u);
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("shops", userDao.getShopsOfUser(u.getUser_id()));
         return "userShops";
     }
 
@@ -142,6 +150,7 @@ public class UserController {
     @GetMapping("/self/shop/{shop_id}/order/{order_id}/add_items")
     public String addItems(Model m, Principal p, @PathVariable int shop_id, @PathVariable int order_id){
         m.addAttribute("item", new ItemsOrdered());
+        m.addAttribute("user_email", p.getName());
         m.addAttribute("shop_id", shop_id);
         m.addAttribute("order", orderDao.getOrderByID(order_id));
         m.addAttribute("items", shopDao.getInventoryByID(shop_id));

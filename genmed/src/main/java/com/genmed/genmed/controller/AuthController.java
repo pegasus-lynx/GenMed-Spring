@@ -31,9 +31,9 @@ public class AuthController {
     private UserDao userdao;
 
     @RequestMapping("")
-    public ModelAndView home() {
-        ModelAndView model = new ModelAndView("home");
-        return model;
+    public String home(Model m, Principal p) {
+//        m.addAttribute("user_email" , p.getName());
+        return "home";
     }
 
     @GetMapping("/register")

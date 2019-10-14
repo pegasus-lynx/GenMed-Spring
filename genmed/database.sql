@@ -82,6 +82,7 @@ CREATE TABLE shop
   shop_name VARCHAR(64) NOT NULL,
   license VARCHAR(10) NOT NULL,
   address_id INT NOT NULL,
+  email_id VARCHAR(48) NOT NULL,
   PRIMARY KEY (shop_id),
   FOREIGN KEY (address_id) REFERENCES address(address_id)
 );
@@ -101,9 +102,10 @@ CREATE TABLE shopInventory
 CREATE TABLE orders
 (
   order_id INT NOT NULL AUTO_INCREMENT,
-  order_status VARCHAR(12) NOT NULL,
+  order_status VARCHAR(12) NULL,
   order_date DATE NOT NULL,
-  bill_amount NUMERIC(8,2) NOT NULL,
+  order_time TIME NOT NULL,
+  bill_amount NUMERIC(8,2) NULL,
   shop_id INT NOT NULL,
   user_id INT NOT NULL,
   PRIMARY KEY (order_id),
@@ -116,12 +118,12 @@ CREATE TABLE shopPhone
   phone_no VARCHAR(13) NOT NULL,
   shop_id INT NOT NULL,
   PRIMARY KEY (phone_no, shop_id),
-  FOREIGN KEY (shop_id) REFERENCES shop(shop_id)
+  FOREIGN KEY (shop_id) REFERENCES shop(shop_id) ON DELETE CASCADE
 );
 
 CREATE TABLE genericDrugComposition
 (
-  percent NUMERIC(4,2) NOT NULL,
+  percent NUMERIC(5,2) NOT NULL,
   gen_id INT NOT NULL,
   comp_id INT NOT NULL,
   PRIMARY KEY (gen_id, comp_id),
@@ -136,7 +138,7 @@ CREATE TABLE itemsOrdered
   order_id INT NOT NULL,
   item_id INT NOT NULL,
   PRIMARY KEY (order_id, item_id),
-  FOREIGN KEY (order_id) REFERENCES orders(order_id),
+  FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
   FOREIGN KEY (item_id) REFERENCES shopInventory(item_id)
 );
 
@@ -145,16 +147,16 @@ CREATE TABLE owner
   user_id INT NOT NULL,
   shop_id INT NOT NULL,
   PRIMARY KEY (user_id, shop_id),
-  FOREIGN KEY (user_id) REFERENCES user(user_id),
-  FOREIGN KEY (shop_id) REFERENCES shop(shop_id)
+  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (shop_id) REFERENCES shop(shop_id) ON DELETE CASCADE
 );
 
 CREATE TABLE reviews
 (
   comment VARCHAR(1024) NOT NULL,
-  rating FLOAT NOT NULL,
+  rating NUMERIC(3,2) NOT NULL,
   review_id INT NOT NULL AUTO_INCREMENT,
   order_id INT NOT NULL,
   PRIMARY KEY (review_id),
-  FOREIGN KEY (order_id) REFERENCES orders(order_id)
+  FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
 );

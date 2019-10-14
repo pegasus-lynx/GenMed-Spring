@@ -1,16 +1,29 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<header class="gen_header">
+<header>
     <div class="bg-image">
-        <h3 class="ft-rw">Shop Detail</h3>
+        <h3 class="ft-rw">Marketplace</h3>
+        <h4 class="ft-rw">Search the shops here</h4>
+        <br>
+        <form action="/shops" method="get" id="search">
+            <p>
+                <input type="text" name="name" id="name_box">
+                <input type="submit" name="info" value="Find">
+                <br>
+            </p>
+        </form>
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-table">
     <section>
-        <h2 class="sec_title ft-rw">{{ shop.shop_name }}</h2>
+        <h2 class="table-title ft-rw">{{ shop.shop_name }}</h2>
         <table>
+            <tr class="table-head ft-rw">
+                <th> Key </th>
+                <th> Value </th>
+            </tr>
             <tr>
                 <td> Name </td>
                 <td> {{ shop.shop_name }}</td>
@@ -25,8 +38,12 @@
             </tr>
         </table>
 
-        <h3 class="sec_title ft-rw"> Address Details : </h3>
+        <h3 class="table-title ft-rw"> Address Details : </h3>
         <table>
+            <tr class="table-head ft-rw">
+                <th> Key </th>
+                <th> Value </th>
+            </tr>
             <tr>
                 <td> Plot No.</td>
                 <td>{{ address.plot_no }}</td>

@@ -7,21 +7,24 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-table">
     <section>
-        <h2 class="sec_title ft-rw">List of All Shops</h2>
+        <h2 class="table-title ft-rw">List of All Shops</h2>
         <table>
-            <tr>
+            <tr class="table-head ft-rw">
                 <th> Shop Name </th>
                 <th> Link to shop </th>
             </tr>
             {% for row in shops %}
             <tr>
                 <td> {{ row.shop_name }}</td>
-                <td> <a href="/account/{{ row.shop_id }}/profile">Link</a></td>
+                <td> <a href="/account/{{ row.shop_id }}/profile"><span class="detail-button fc-white txt-sb"> Link</span></a></td>
             </tr>
             {% endfor %}
         </table>
     </section>
+    <br>
+    <br>
+    <a href="/self/add_shop"><span class="detail-button-lg fc-white txt-sb"> Create Shop </span></a>
 </div>
 {% endblock %}

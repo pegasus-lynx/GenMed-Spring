@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -25,9 +26,14 @@ public class ShopController {
     private AddressDao addressDao;
 
     @RequestMapping(value = "/shops")
-    public String viewShops(Model m, Principal p){
-        m.addAttribute("shops", shopDao.getAllShops());
-        m.addAttribute("user", userDao.findByUsername(p.getName()));
+    public String viewShops(@RequestParam(name = "name", required = false) String name, Model m, Principal p){
+        if(name==null){
+            m.addAttribute("shops", shopDao.getAllShops());
+        }
+        else{
+            m.addAttribute("shops", shopDao.getShopsWithNameLike(name));
+        }
+        m.addAttribute("user_email", p.getName());
         return "shops";
     }
 
@@ -36,13 +42,14 @@ public class ShopController {
         Shop s = shopDao.getShopByID(shop_id);
         m.addAttribute("shop", s);
         m.addAttribute("address", addressDao.getAddressByID(s.getAddress_id()));
-        m.addAttribute("user", userDao.findByUsername(p.getName()));
+        m.addAttribute("user_email", p.getName());
         return "shopDetail";
     }
 
     @RequestMapping(value = "/shop/{shop_id}/inventory")
     public String viewShopInventory(Model m, Principal p, @PathVariable int shop_id){
         m.addAttribute("items", shopDao.getInventoryByID(shop_id));
+        m.addAttribute("user_email", p.getName());
         m.addAttribute("user", userDao.findByUsername(p.getName()));
         return "shopInventory";
     }

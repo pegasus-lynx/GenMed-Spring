@@ -60,8 +60,37 @@ public class DrugDao {
         });
     }
 
+    public List<Drugs> listDrugsWithNameLike(String name){
+        String query = "select * from drugs where name like '%"+name+"%'";
+        return jt.query(query, new RowMapper<Drugs>() {
+            @Override
+            public Drugs mapRow(ResultSet row, int i) throws SQLException {
+                Drugs u = new Drugs();
+                u.setDrug_id(row.getInt("drug_id"));
+                u.setGen_id(row.getInt("gen_id"));
+                u.setMf_name(row.getString("mf_name"));
+                u.setName(row.getString("name"));
+                u.setIs_generic(row.getInt("is_generic"));
+                return u;
+            }
+        });
+    }
+
     public List<GenericDrug> listAllGenDrugs() {
         String query = "select * from genericDrugs";
+        return jt.query(query, new RowMapper<GenericDrug>() {
+            @Override
+            public GenericDrug mapRow(ResultSet row, int i) throws SQLException {
+                GenericDrug g = new GenericDrug();
+                g.setGen_id(row.getInt("gen_id"));
+                g.setName(row.getString("name"));
+                return g;
+            }
+        });
+    }
+
+    public List<GenericDrug> listGenDrugsWithNameLike(String name) {
+        String query = "select * from genericDrugs where name like '%"+name+"%'";
         return jt.query(query, new RowMapper<GenericDrug>() {
             @Override
             public GenericDrug mapRow(ResultSet row, int i) throws SQLException {
@@ -146,4 +175,5 @@ public class DrugDao {
         String query = "select drug_id from drugs where is_generic=? and mf_name=? and name=?";
         return jt.queryForObject(query, new Object[]{is_gen, mf_name, drug_name}, Integer.class);
     }
+
 }

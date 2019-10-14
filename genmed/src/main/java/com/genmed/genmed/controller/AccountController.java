@@ -33,6 +33,7 @@ public class AccountController {
 
         User u = userDao.findByUsername(p.getName());
         m.addAttribute("user", u);
+        m.addAttribute("user_email", p.getName());
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
@@ -41,6 +42,7 @@ public class AccountController {
         m.addAttribute("shop", s);
         Address a = addressDao.getAddressByID(s.getAddress_id());
         m.addAttribute("address", a);
+        m.addAttribute("phones", shopDao.getPhoneByID(shop_id));
         return "accountProfile";
     }
 
@@ -49,6 +51,7 @@ public class AccountController {
 
         User u = userDao.findByUsername(p.getName());
         m.addAttribute("user", u);
+        m.addAttribute("user_email", p.getName());
         m.addAttribute("shop_id", shop_id);
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
@@ -61,7 +64,7 @@ public class AccountController {
         User u = userDao.findByUsername(p.getName());
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
-
+        System.out.println(phone_no);
         int user_id = userDao.getUserIDByEmailID(p.getName());
         shopDao.saveShopPhone(phone_no, shop_id);
         return "redirect:/account/"+shop_id+"/profile";
@@ -72,6 +75,7 @@ public class AccountController {
 
         User u = userDao.findByUsername(p.getName());
         m.addAttribute("user", u);
+        m.addAttribute("user_email", p.getName());
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
@@ -84,6 +88,7 @@ public class AccountController {
 
         User u = userDao.findByUsername(p.getName());
         m.addAttribute("user", u);
+        m.addAttribute("user_email", p.getName());
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
@@ -96,6 +101,7 @@ public class AccountController {
 
         User u = userDao.findByUsername(p.getName());
         m.addAttribute("user", u);
+        m.addAttribute("user_email", p.getName());
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
@@ -124,6 +130,7 @@ public class AccountController {
             return "redirect:/self/shops";
 
         m.addAttribute("drug", new Drugs());
+        m.addAttribute("user_email", p.getName());
         List<GenericDrug> gen_drugs = drugDao.listAllGenDrugs();
         m.addAttribute("gen_drugs", gen_drugs);
         return "addDrug";
@@ -148,6 +155,7 @@ public class AccountController {
             return "redirect:/self/shops";
 
         m.addAttribute("shop_id", shop_id);
+        m.addAttribute("user_email", p.getName());
         m.addAttribute("drugBatch", new DrugBatch());
         return "addDrugBatch";
     }
@@ -200,6 +208,7 @@ public class AccountController {
     public String accountOrders(Model m, Principal p, @PathVariable int shop_id){
 
         User u = userDao.findByUsername(p.getName());
+        m.addAttribute("user_email", p.getName());
         m.addAttribute("user", u);
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";

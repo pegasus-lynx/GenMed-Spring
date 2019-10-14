@@ -1,20 +1,15 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-<header class="gen_header">
+<header>
     <div class="bg-image">
         <!-- Fix form -->
-        <h3 class="ft-rw">Search the medicine here</h3>
-        <form action="/drug" method="get" autocomplete="off" id="search">
+        <h3 class="ft-rw">Medicines</h3>
+        <h4 class="ft-rw">Search the generic medicine here</h4>
+        <form action="/gen_drugs" method="get" id="search">
             <p>
-                <input type="text" name="drug_name" id="name_box" list="drugs">
-                <datalist id="drugs">
-                    {% for row in drugs %}
-                    <option value="{{ row.drug_name }}">
-                        {% endfor %}
-                </datalist>
-                <input type="hidden" name="drug_id" id="id_box">
-                <input type="submit" name="info" value="Get Info" onclick="getInfo()">
+                <input type="text" name="name" id="name_box">
+                <input type="submit" name="info" value="Find">
                 <br>
             </p>
         </form>
@@ -22,26 +17,21 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-table">
     <section>
-        <h2 class="sec_title ft-rw">List of all medicines</h2>
+        <h2 class="table-title ft-rw">List of all generic medicines</h2>
         <table>
-            <tr>
+            <tr class="table-head ft-rw">
                 <th> Name </th>
+                <th> Link </th>
             </tr>
-            {% for row in genDrugs %}
+            {% for row in drugs %}
             <tr>
-                <td><a href="/gen_drug/{{ row.gen_id }}">{{ row.name }}</a> </td>
+                <td>{{ row.name }}</td>
+                <td><a href="/gen_drug/{{ row.gen_id }}"><span class="detail-button fc-white txt-sb"> View Drug </span></a></td>
             </tr>
             {% endfor %}
         </table>
     </section>
 </div>
-
-<script>
-        function setID() {
-            console.log($("#name_box option:selected")
-            $("#id_box").val($("#name_box option:selected").attr('id'))
-        }
-    </script>
 {% endblock %}

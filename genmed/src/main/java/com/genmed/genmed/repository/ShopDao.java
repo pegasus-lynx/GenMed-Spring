@@ -76,6 +76,33 @@ public class ShopDao {
         });
     }
 
+    public List<Shop> getShopsWithNameLike(String name) {
+        String query = "select * from shop where shop_name like '%"+name+"%'";
+        return jt.query(query, new RowMapper<Shop>() {
+            @Override
+            public Shop mapRow(ResultSet r, int i) throws SQLException {
+                Shop s = new Shop();
+                s.setShop_name(r.getString("shop_name"));
+                s.setShop_id(r.getInt("shop_id"));
+                return s;
+            }
+        });
+    }
+
+    public List<Shop> getShopsHavingDrug(Integer drug_id) {
+        String query = "select * from shop where shop_id in (" +
+                "select b.shop_id from drugBatch b, shopInventory s where s.batch_id=b.batch_id and s.quantity > 0 and b.drug_id="+drug_id+")";
+        return jt.query(query, new RowMapper<Shop>() {
+            @Override
+            public Shop mapRow(ResultSet r, int i) throws SQLException {
+                Shop s = new Shop();
+                s.setShop_name(r.getString("shop_name"));
+                s.setShop_id(r.getInt("shop_id"));
+                return s;
+            }
+        });
+    }
+
     public Shop getShopByID(int shop_id) {
         String query = "select * from shop where shop_id="+shop_id;
         return jt.queryForObject(query, new RowMapper<Shop>() {
@@ -147,6 +174,17 @@ public class ShopDao {
         List<Map<String,Object>> rs = jt.queryForList(query);
         for( Map<String,Object> r:rs ) {
             String s = (String) r.get("batch_no");
+            res.add(s);
+        }
+        return res;
+    }
+
+    public List<String> getPhoneByID(int shop_id){
+        String query = "select phone_no from shopPhone where shop_id="+shop_id;
+        List<String> res = new ArrayList<String>();
+        List<Map<String,Object>> rs = jt.queryForList(query);
+        for( Map<String,Object> r:rs ) {
+            String s = (String) r.get("phone_no");
             res.add(s);
         }
         return res;
