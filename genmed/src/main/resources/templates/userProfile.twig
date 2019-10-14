@@ -45,18 +45,16 @@
             <th> Sl. No. </th>
             <th> Phone No. </th>
         </tr>
-        {% if phones is not null %}
         {% for row in phones %}
         <tr>
             <td> {{ loop.index }}</td>
             <td> {{ row.phone_no }}</td>
         </tr>
         {% endfor %}
-        {% endif %}
         </table>
     </section>
 
-    <a href="/self/add_address"><span class="detail-button fc-white txt-sb"> Add Address </span></a>
+    <a href="/self/add_address"><span class="detail-button-lg fc-white txt-sb"> Add Address </span></a>
     <a href="/self/add_phone"><span class="detail-button fc-white txt-sb"> Add Phone </span></a>
 </div>
 {% endblock %}

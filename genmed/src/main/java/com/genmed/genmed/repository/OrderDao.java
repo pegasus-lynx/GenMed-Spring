@@ -89,7 +89,7 @@ public class OrderDao {
     }
 
     public List<Orders> getOrdersByShopID(int shop_id){
-        String query = "select * from orders where shop_id"+shop_id;
+        String query = "select * from orders where shop_id="+shop_id;
         return jt.query(query, new RowMapper<Orders>() {
             @Override
             public Orders mapRow(ResultSet r, int i) throws SQLException {
@@ -134,4 +134,11 @@ public class OrderDao {
         String query = "update orders set order_status=? where order_id="+order_id;
         jt.update(query, order_status);
     }
+
+    public void deleteReview(int review_id){
+        String query = "delete from reviews where review_id="+review_id;
+        jt.update(query);
+    }
+
+
 }

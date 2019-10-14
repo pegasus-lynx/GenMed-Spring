@@ -7,23 +7,25 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-table">
     <section>
         <table>
-            <tr>
+            <tr class="table-head ft-rw">
                 <th> Sl. No. </th>
                 <th> Order ID </th>
                 <th> Order Date </th>
                 <th> Order Status </th>
                 <th> Bill Amount </th>
+                <th> Link </th>
             </tr>
             {% for row in orders %}
             <tr>
-                <td></td>
-                <td><a href="/self/order/{{ row.order_id }}">{{ row.order_id }}</a> </td>
+                <td> {{ loop.index }}</td>
+                <td> {{ row.order_id }}</td>
                 <td> {{ row.order_date }}</td>
                 <td> {{ row.order_status }}</td>
                 <td> {{ row.bill_amount }}</td>
+                <td><a href="/self/order/{{ row.order_id }}"><span class="detail-button-lg fc-white txt-sb"> View Order </span></a></td>
             </tr>
             {% endfor %}
         </table>

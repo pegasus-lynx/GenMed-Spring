@@ -7,15 +7,15 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-form">
     <section id="about">
-        <form action="/account/add_drug" method="POST" id="drug_form">
-            <input type="text" placeholder="Name"  name="name"/><br>
-            <input type="text" placeholder="Manufacturer Name"  name="mf_name"/><br>
+        <form class="post-forms" action="/account/add_drug" method="POST" id="drug_form">
+            <input type="text" placeholder="Name"  name="name" required/><br>
+            <input type="text" placeholder="Manufacturer Name" name="mf_name" required/><br>
 
             <input type="checkbox" name="is_generic" value="1">Is Generic ?</input>
             <br>
-            <select name="gen_id" id="gen_name">
+            <select name="gen_id" id="gen_name" required>
                 {% for row in gen_drugs %}
                     <option value="{{ row.gen_id }}">{{ row.name }}</option>
                 {% endfor %}

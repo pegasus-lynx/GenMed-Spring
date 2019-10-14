@@ -7,7 +7,7 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-table">
     <section id="about">
         <h3 class="ft-lt"> Current Order Info : </h3>
         <table>
@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td> Order Status </td>
-                <td> {{ order.order_status }}</td>
+                <td> {{ order.status }}</td>
             </tr>
             <tr>
                 <td> Order Date </td>
@@ -44,9 +44,13 @@
             </tr>
             {% endfor %}
         </table>
-
-        <form action="/self/shop/{{shop_id}}/order/{{ order.order_id }}/add_items" method="POST" id="order_item_form">
-            <select name="item_name" id="item_name" onchange="setFormFields()">
+    </section></div>
+<br>
+<br>
+<br>
+<div class="wrapper-form">
+        <form class="post-forms" action="/self/shop/{{shop_id}}/order/{{ order.order_id }}/add_items" method="POST" id="order_item_form">
+            <select name="item_name" id="item_name" onchange="setFormFields()" required>
                 <option value="0">---</option>
                 {% for row in items %}
                 <option value="{{ row.item_id }}@{{ row.quantity }}@{{ row.price }}">{{ row.drugBatch.drug.name }} @ {{ row.drugBatch.drug.mf_name }}</option>
@@ -54,12 +58,16 @@
             </select>
             <input type="hidden" name="item_id" id="item_id">
             <input type="hidden" name="price" id="price">
-            <input type="number" placeholder="Quantity"  name="quantity" id="quantity" min="1" onfocusout="checkQuantity()"/>
+            <input type="number" placeholder="Quantity"  name="quantity" id="quantity" min="1" onfocusout="checkQuantity()" required/>
             <input type="submit" value="Add Item" /><br>
             <p id="err"></p>
         </form>
-    </section>
 </div>
+<br>
+<br>
+<a href="/self/shop/{{shop_id}}/order/{{ order.order_id }}/complete"><span class="detail-button-lg fc-white txt-sb">Complete</span></a>
+<a href="/self/cancel/order/{{order_id}}"><span class="detail-button-lg fc-white txt-sb">Cancel</span></a>
+
 
 <script>
     function setFormFields() {
@@ -69,17 +77,6 @@
         $('#item_id').attr('value',parseInt(res[0]));
         $('#quantity').attr('max',parseInt(res[1]));
         $('#price').attr('value',parseInt(res[2]));
-    }
-
-    function checkQuantity() {
-        var q = $('#quantity').attr('value');
-        var m = $('#quantity').attr('max');
-        if ( q > m ) {
-            $('#err').html('Quantity is more than the max limit' + m);
-        }
-        else {
-            $('#err').html();
-        }
     }
 </script>
 {% endblock %}

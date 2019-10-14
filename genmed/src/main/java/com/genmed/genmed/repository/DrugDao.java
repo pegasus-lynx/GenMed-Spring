@@ -176,4 +176,32 @@ public class DrugDao {
         return jt.queryForObject(query, new Object[]{is_gen, mf_name, drug_name}, Integer.class);
     }
 
+    public void saveGenDrug(String name){
+        String query = "insert into genericDrugs(name) values (?)";
+        jt.update(query,name);
+    }
+
+    public void saveDrugComp(String comp_name){
+        String query = "insert into drugComponents(comp_name) values (?)";
+        jt.update(query,comp_name);
+    }
+
+    public List<DrugComp> listAllDrugComp() {
+        String query = "select * from drugComponents";
+        return jt.query(query, new RowMapper<DrugComp>() {
+            @Override
+            public DrugComp mapRow(ResultSet r, int i) throws SQLException {
+                DrugComp d = new DrugComp();
+                d.setComp_name(r.getString("comp_name"));
+                d.setComp_id(r.getInt("comp_id"));
+                return d;
+            }
+        });
+    }
+
+    public void saveDrugComposition(BigDecimal percent, int comp_id, int gen_id) {
+        String query = "insert into genericDrugComposition(percent, comp_id, gen_id) values (?,?,?)";
+        jt.update(query, percent, comp_id, gen_id);
+    }
+
 }

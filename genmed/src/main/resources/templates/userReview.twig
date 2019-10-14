@@ -7,12 +7,12 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-form">
     <section id="about">
-        <form action="/self/order/{{ order_id }}/add_review" method="POST" id="review_form">
-            <input type="text" disabled name="order_id" value="{{ order_id }}">
-            <textarea name="comment" rows="5" cole="100">Comment here...</textarea>
-            <input type="range" min="1" max="5" value="3" name="rating" />
+        <form class="post-forms" action="/self/order/{{ order_id }}/add_review" method="POST" id="review_form">
+            <input type="text" disabled name="order_id" value="{{ order_id }}" required>
+            <textarea name="comment" rows="5" cols="100" required>Comment here...</textarea>
+            <input type="range" min="1" max="5" value="3" name="rating" required/>
             <input type="submit" value="Add Review" />
         </form>
     </section>

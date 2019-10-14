@@ -41,18 +41,20 @@ public class UserController {
     @RequestMapping("/self/profile")
     public String userProfile(Model m, Principal p) {
         int user_id = userDao.getUserIDByEmailID(p.getName());
-        m.addAttribute("user", userDao.getUserDetailByID(user_id));
         m.addAttribute("user_email", p.getName());
+        m.addAttribute("user", userDao.findByUsername(p.getName()));
         m.addAttribute("addresses", addressDao.getAddressesByUserID(user_id));
+        m.addAttribute("phones", userDao.getPhoneByID(user_id));
         return "userProfile";
     }
-
+    // DONE
     @GetMapping("/self/add_address")
     public String addAddress(Model m, Principal p) {
         m.addAttribute("user_email", p.getName());
         m.addAttribute("address", new Address());
         return "userAddress";
     }
+    // DONE
 
     @PostMapping("/self/add_address")
     public String addAddress(@ModelAttribute("address") Address a, Principal p) {
@@ -60,12 +62,14 @@ public class UserController {
         addressDao.saveAddressOfUser(address_id, a.getAddress_type(), userDao.getUserIDByEmailID(p.getName()));
         return "redirect:/self/profile";
     }
+    // DONE
 
     @GetMapping("/self/add_phone")
     public String addPhone(Model m, Principal p){
         m.addAttribute("user_email", p.getName());
         return "userPhone";
     }
+    // DONE
 
     @PostMapping("/self/add_phone")
     public String addPhone(@RequestParam String phone_no, Principal p){
@@ -73,6 +77,7 @@ public class UserController {
         userDao.saveUserPhone(phone_no, user_id);
         return "redirect:/self/profile";
     }
+    // DONE
 
 
     @GetMapping("/self/orders")
@@ -82,13 +87,16 @@ public class UserController {
         m.addAttribute("orders", userDao.getOrdersByUserID(user_id));
         return "userOrders";
     }
+    // DONE
 
     @RequestMapping("/self/order/{order_id}")
     public String userOrderDetail(Model m, Principal p,@PathVariable int order_id){
         m.addAttribute("user_email", p.getName());
         m.addAttribute("order", orderDao.getOrderByID(order_id));
+        m.addAttribute("reviews", orderDao.getReviewsByOrderID(order_id));
         return "userOrdersDetail";
     }
+    // DONE
 
     @GetMapping("/self/order/{order_id}/add_review")
     public String userOrderAddReview(Model m, Principal p, @PathVariable int order_id){
@@ -97,12 +105,14 @@ public class UserController {
         m.addAttribute("reviews", new Reviews());
         return "userReview";
     }
+    // DONE
 
     @PostMapping("/self/order/{order_id}/add_review")
     public String userOrderAddReview(@ModelAttribute("reviews") Reviews r, @PathVariable int order_id, Principal p) {
         userDao.saveUserReview(r.getComment(), r.getRating(), r.getOrder_id());
         return "redirect:/user/order/"+order_id;
     }
+    // DONE
 
     @GetMapping("/self/add_shop")
     public String addShop(Model m, Principal p) {
@@ -111,6 +121,7 @@ public class UserController {
         m.addAttribute("user_email", p.getName());
         return "createShop";
     }
+    // DONE
 
     @PostMapping("/self/add_shop")
     public String addShop(@ModelAttribute("shop") Shop s, @ModelAttribute("address") Address a, Principal p) {
@@ -125,6 +136,7 @@ public class UserController {
         userDao.changeRoleToShop(user_id);
         return "redirect:/self/shops";
     }
+    // DONE
 
     @RequestMapping("/self/shops")
     public String selfShops(Model m, Principal p){
@@ -134,7 +146,7 @@ public class UserController {
         m.addAttribute("shops", userDao.getShopsOfUser(u.getUser_id()));
         return "userShops";
     }
-
+    // DONE
 
     @RequestMapping("/self/shop/{shop_id}/place_order")
     public String placeOrder(@ModelAttribute("order") Orders o, Principal p, @PathVariable int shop_id){
@@ -146,6 +158,7 @@ public class UserController {
         );
         return "redirect:/self/shop/"+shop_id+"/order/"+order_id+"/add_items";
     }
+    // DONE
 
     @GetMapping("/self/shop/{shop_id}/order/{order_id}/add_items")
     public String addItems(Model m, Principal p, @PathVariable int shop_id, @PathVariable int order_id){
@@ -159,13 +172,14 @@ public class UserController {
 
     @PostMapping("/self/shop/{shop_id}/order/{order_id}/add_items")
     public String addItems(@ModelAttribute("item") ItemsOrdered i, Principal p, @PathVariable int shop_id, @PathVariable int order_id){
-
-        orderDao.addItemToOrder(order_id, i.getQuantity(), i.getAmount(), i.getItem_id(), shop_id);
+        BigDecimal q = new BigDecimal(i.getQuantity());
+        orderDao.addItemToOrder(order_id, i.getQuantity(), q.multiply(i.getAmount()), i.getItem_id(), shop_id);
         return "redirect:/self/shop/"+shop_id+"/order/"+order_id+"/add_items";
     }
 
     @RequestMapping("/self/cancel/order/{order_id}")
     public String cancelOrder(Model m, Principal p, @PathVariable int order_id){
+        shopDao.refillItems(order_id);
         orderDao.removeOrder(order_id);
         return "redirect:/self/orders";
     }
@@ -175,4 +189,25 @@ public class UserController {
         orderDao.changeOrderStatus(order_id, "ordered");
         return "redirect:/self/order/"+order_id;
     }
+
+    @RequestMapping("/self/order/{order_id}/review/{review_id}/delete")
+    public String deleteReview(@PathVariable int order_id, @PathVariable int review_id){
+        orderDao.deleteReview(review_id);
+        return "redirect:/self/order/"+order_id;
+    }
+    // DONE
+
+    @RequestMapping("/self/order/{order_id}/mark/cancel")
+    public String markCancelled(@PathVariable int order_id){
+        orderDao.changeOrderStatus(order_id, "cancelled");
+        shopDao.refillItems(order_id);
+        return "redirect:/self/order/"+order_id;
+    }
+    // DONE
+    @RequestMapping("/self/order/{order_id}/mark/delivered")
+    public String markDelivered(@PathVariable int order_id){
+        orderDao.changeOrderStatus(order_id, "delivered");
+        return "redirect:/self/order/"+order_id;
+    }
+    // DONE
 }

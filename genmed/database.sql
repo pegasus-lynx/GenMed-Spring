@@ -2,8 +2,8 @@ CREATE TABLE address
 (
   plot_no VARCHAR(32),
   street VARCHAR(32),
-  latitude NUMERIC(13,10) NOT NULL,
-  longitude NUMERIC(13,10) NOT NULL,
+  latitude NUMERIC(24,20) NOT NULL,
+  longitude NUMERIC(24,20) NOT NULL,
   address_id INT NOT NULL AUTO_INCREMENT,
   city VARCHAR(32) NOT NULL,
   district VARCHAR(32) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE drugComponents
 
 CREATE TABLE drugBatch
 (
-  batch_no INT NOT NULL,
+  batch_no VARCHAR(12) NOT NULL,
   mfg_date DATE NOT NULL,
   exp_date DATE NOT NULL,
   batch_id INT NOT NULL AUTO_INCREMENT,

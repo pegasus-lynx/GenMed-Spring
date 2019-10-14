@@ -195,4 +195,21 @@ public class ShopDao {
         return jt.queryForObject(query, new Object[]{drug_id, batch_no}, Integer.class);
     }
 
+    public List<Shop> getShopsByUserID(int user_id){
+        String query = "select * from shop where shop_id in (select shop_id from owner where user_id="+user_id+")";
+        return jt.query(query, new RowMapper<Shop>() {
+            @Override
+            public Shop mapRow(ResultSet r, int i) throws SQLException {
+                Shop s = new Shop();
+                s.setShop_id(r.getInt("shop_id"));
+                s.setShop_name((r.getString("shop_name")));
+                return s;
+            }
+        });
+    }
+
+    // Implement this later
+    public void refillItems(int order_id){
+    }
+
 }

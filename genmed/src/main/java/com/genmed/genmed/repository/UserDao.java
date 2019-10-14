@@ -42,6 +42,17 @@ public class UserDao {
         else return true;
     }
 
+    public List<String> getPhoneByID(int user_id){
+        String query = "select phone_no from userPhone where user_id="+user_id;
+        List<String> res = new ArrayList<String>();
+        List<Map<String,Object>> rs = jt.queryForList(query);
+        for( Map<String,Object> r:rs ) {
+            String s = (String) r.get("phone_no");
+            res.add(s);
+        }
+        return res;
+    }
+
     public User findByUsername(String email_id) {
         String query = "select * from user where email_id='"+email_id+"'";
         return jt.queryForObject(query, new RowMapper<User>() {

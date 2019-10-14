@@ -38,9 +38,12 @@ public class AccountController {
             return "redirect:/self/shops";
 
         Shop s = shopDao.getShopByID(shop_id);
-        System.out.println(s.getAddress_id());
-        m.addAttribute("shop", s);
         Address a = addressDao.getAddressByID(s.getAddress_id());
+
+        m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
+
+        m.addAttribute("shop", s);
         m.addAttribute("address", a);
         m.addAttribute("phones", shopDao.getPhoneByID(shop_id));
         return "accountProfile";
@@ -55,6 +58,9 @@ public class AccountController {
         m.addAttribute("shop_id", shop_id);
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
+
+        m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
         return "accountPhone";
     }
 
@@ -79,6 +85,8 @@ public class AccountController {
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
+        m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
         m.addAttribute("reviews", orderDao.getReviewsForShopID(shop_id));
         return "accountFeedbacks";
     }
@@ -92,6 +100,8 @@ public class AccountController {
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
+        m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
         m.addAttribute("items" , shopDao.getInventoryByID(shop_id));
         return "accountInventory";
     }
@@ -106,6 +116,7 @@ public class AccountController {
             return "redirect:/self/shops";
 
         m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
         m.addAttribute("drugs", drugDao.listAllDrugs());
         m.addAttribute("item", new ShopInventory());
         return "addInventory";
@@ -155,6 +166,7 @@ public class AccountController {
             return "redirect:/self/shops";
 
         m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
         m.addAttribute("user_email", p.getName());
         m.addAttribute("drugBatch", new DrugBatch());
         return "addDrugBatch";
@@ -171,39 +183,6 @@ public class AccountController {
         return "redirect:/account/"+shop_id+"/profile";
     }
 
-
-//    @GetMapping("/account/{shop_id}/add_owner")
-//    public String addOwner(Model m, Principal p, @PathVariable int shop_id){
-//
-//        User u = userDao.findByUsername(p.getName());
-//        m.addAttribute("user", u);
-//        if(!shopDao.isOwner(u.getUser_id(), shop_id))
-//            return "redirect:/self/shops";
-//
-//        return "addOwner";
-//    }
-//
-//    @PostMapping("/account/{shop_id}/add_owner")
-//    public String addOwner(@RequestParam String email_id, Principal p, @PathVariable int shop_id){
-//
-//        User u = userDao.findByUsername(p.getName());
-//        if(!shopDao.isOwner(u.getUser_id(), shop_id))
-//            return "redirect:/self/shops";
-//
-//        return "redirect:/account/"+shop_id+"/profile";
-//    }
-//
-//    @RequestMapping("/account/{shop_id}/owners")
-//    public String accountOwners(Model m, Principal p, @PathVariable int shop_id){
-//
-//        User u = userDao.findByUsername(p.getName());
-//        m.addAttribute("user", u);
-//        if(!shopDao.isOwner(u.getUser_id(), shop_id))
-//            return "redirect:/self/shops";
-//        m.addAttribute("owners", shopDao.getOwnersByShopID(shop_id));
-//        return "accountOwners";
-//    }
-
     @RequestMapping("/account/{shop_id}/orders")
     public String accountOrders(Model m, Principal p, @PathVariable int shop_id){
 
@@ -213,7 +192,37 @@ public class AccountController {
         if(!shopDao.isOwner(u.getUser_id(), shop_id))
             return "redirect:/self/shops";
 
+        m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
         m.addAttribute("orders", orderDao.getOrdersByShopID(shop_id));
         return "accountOrders";
+    }
+
+    @RequestMapping("/account/{shop_id}/order/{order_id}/mark/cancel")
+    public String markCancel(@PathVariable int shop_id, @PathVariable int order_id){
+        orderDao.changeOrderStatus(order_id,"cancelled");
+        shopDao.refillItems(order_id);
+        return "redirect:/account/"+shop_id+"/orders";
+    }
+
+    @RequestMapping("/account/{shop_id}/order/{order_id}/mark/processing")
+    public String markProcessing(@PathVariable int shop_id, @PathVariable int order_id){
+        orderDao.changeOrderStatus(order_id,"processing");
+        return "redirect:/account/"+shop_id+"/orders";
+    }
+
+    @RequestMapping("/account/{shop_id}/order/{order_id}")
+    public String viewShopOrder(Model m, Principal p, @PathVariable int shop_id, @PathVariable int order_id){
+
+        User u = userDao.findByUsername(p.getName());
+        m.addAttribute("user_email", p.getName());
+        m.addAttribute("user", u);
+        if(!shopDao.isOwner(u.getUser_id(), shop_id))
+            return "redirect:/self/shops";
+
+        m.addAttribute("shop_id", shop_id);
+        m.addAttribute("shops", shopDao.getShopsByUserID(u.getUser_id()));
+        m.addAttribute("order", orderDao.getOrderByID(order_id));
+        return "viewShopOrder";
     }
 }

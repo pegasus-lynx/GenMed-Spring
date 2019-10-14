@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.genmed</groupId>
 	<artifactId>genmed</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GenMed</name>
 	<description>GenMed:Project for ud</description>

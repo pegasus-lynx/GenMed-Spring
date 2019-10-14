@@ -1,5 +1,9 @@
 {% extends 'base.twig' %}
 
+{% block header %}
+{% include 'shopNav.twig' %}
+{% endblock%}
+
 {% block content %}
 <header class="gen_header">
     <div class="bg-image">
@@ -7,20 +11,20 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-form">
     <section id="about">
-        <form action="/account/{{ shop_id }}/inventory/add" method="POST" id="inventory_form">
-            <select name="drug_id" id="drug_name" onchange="getBatchNo()">
+        <form class="post-forms" action="/account/{{ shop_id }}/inventory/add" method="POST" id="inventory_form">
+            <select name="drug_id" id="drug_name" onchange="getBatchNo()" required>
                 {% for row in drugs %}
                 <option value="{{ row.drug_id }}">{{ row.name }}</option>
                 {% endfor %}
             </select><br>
 
-            <select name="batch_no" id="batch_no" onchange="setBatchID()"></select><br>
+            <select name="batch_no" id="batch_no" onchange="setBatchID()" required></select><br>
             <input type="hidden" name="batch_id" id="batch_id"/>
 
-            <input type="text" placeholder="Quantity"  name="quantity"/><br>
-            <input type="text" placeholder="Price"  name="price"/><br>
+            <input type="text" placeholder="Quantity"  name="quantity" required/><br>
+            <input type="text" placeholder="Price"  name="price" required/><br>
             <input type="submit" value="Add Item" />
         </form>
     </section>

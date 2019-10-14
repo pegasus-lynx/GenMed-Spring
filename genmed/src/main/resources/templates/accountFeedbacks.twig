@@ -1,5 +1,9 @@
 {% extends 'base.twig' %}
 
+{% block header %}
+{% include 'shopNav.twig' %}
+{% endblock%}
+
 {% block content %}
 <header class="gen_header">
     <div class="bg-image">
@@ -7,12 +11,12 @@
     </div>
 </header>
 
-<div class="wrapper">
+<div class="wrapper-table">
     <section>
         <h2 class="sec_title ft-rw">List of All FeedBacks</h2>
         {% if shops is not null %}
         <table>
-            <tr>
+            <tr class="table-head ft-rw">
                 <th> Sl. No. </th>
                 <th> Comment </th>
                 <th> Rating </th>
@@ -23,7 +27,7 @@
                 <td> {{ loop.index }}</td>
                 <td> {{ row.comment }}</td>
                 <td> {{ row.rating }}</td>
-                <td> <a href="/order/{{ row.order_id }}">Link</a></td>
+                <td> <a href="/order/{{ row.order_id }}"><span class="detail-button fc-white txt-sb">Link</span></a></td>
             </tr>
             {% endfor %}
         </table>

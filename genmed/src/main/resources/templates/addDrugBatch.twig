@@ -1,5 +1,9 @@
 {% extends 'base.twig' %}
 
+{% block header %}
+{% include 'shopNav.twig' %}
+{% endblock%}
+
 {% block content %}
 <header class="gen_header">
     <div class="bg-image">
@@ -10,18 +14,18 @@
 <div class="wrapper-form">
     <section id="about">
         <form class="post-forms" action="/account/{{ shop_id }}/add_drug_batch" method="POST" id="drug_batch_form">
-            <input type="text" placeholder="Batch No"  name="batch_no"/><br>
+            <input type="text" placeholder="Batch No"  name="batch_no" required/><br>
 
-            <input type="date" placeholder="MFG DATE"  name="mfg_date"/><br>
-            <input type="date" placeholder="EXP DATE"  name="exp_date"/><br>
+            <input type="date" placeholder="MFG DATE"  name="mfg_date" required/><br>
+            <input type="date" placeholder="EXP DATE"  name="exp_date" required/><br>
 
-            <select name="is_gen" id="is_gen" onchange="getMfName()">
+            <select name="is_gen" id="is_gen" onchange="getMfName()" required>
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
 
-            <select name="mf_name" id="mf_name" onchange="getDrugName()"></select>
-            <select name="drug_name" id="drug_name" onchange="setDrugID()"></select>
+            <select name="mf_name" id="mf_name" onchange="getDrugName()" required></select>
+            <select name="drug_name" id="drug_name" onchange="setDrugID()" required></select>
 
             <input type="hidden" id="drug_id" name="drug_id">
 

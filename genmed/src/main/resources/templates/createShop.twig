@@ -11,20 +11,20 @@
     <section id="about">
         <h3 class="ft-lt"> Shop Registration Form </h3>
         <form class="post-forms" action="/self/add_shop" method="POST" id="shop_form">
-            <input type="text" placeholder="Shop Name"  name="shop_name"/><br>
-            <input type="text" placeholder="License No."  name="license"/><br>
-            <input type="text" placeholder="Shop Email ID"  name="email_id"/><br>
+            <input type="text" placeholder="Shop Name"  name="shop_name" required/><br>
+            <input type="text" placeholder="License No."  name="license" required/><br>
+            <input type="text" placeholder="Shop Email ID"  name="email_id" required/><br>
 
             <h3> Add Address</h3>
 
-            <input type="text" placeholder="Plot Number" class="login-input" name="plot_no"/><br>
-            <input type="text" placeholder="Street" class="login-input" name="street"/><br>
-            <input type="text" placeholder="City" class="login-input" name="city"/><br>
-            <input type="text" placeholder="District" class="login-input" name="district"/><br>
-            <input type="text" placeholder="State" class="login-input" name="state"/><br>
+            <input type="text" placeholder="Plot Number" class="login-input" name="plot_no" required/><br>
+            <input type="text" placeholder="Street" class="login-input" name="street" required/><br>
+            <input type="text" placeholder="City" class="login-input" name="city" required/><br>
+            <input type="text" placeholder="District" class="login-input" name="district" required/><br>
+            <input type="text" placeholder="State" class="login-input" name="state" required/><br>
 
-            <input type="text" name="latitude" id="lat" placeholder="Latitude"/><br>
-            <input type="text" name="longitude" id="lon" placeholder="Longitude"/><br>
+            <input type="text" name="latitude" id="lat" placeholder="Latitude" required/><br>
+            <input type="text" name="longitude" id="lon" placeholder="Longitude" required/><br>
             <input type="button" class="inp" id="loc_btn" onclick="getLocation()" value="Fetch Location">
 
             <input type="submit" value="Create Shop" />

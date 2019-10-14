@@ -10,6 +10,7 @@ public class DrugComposition {
     private int comp_id;
     private String comp_name;
     private BigDecimal percent;
+    private int gen_id;
 
     public int getComp_id() {
         return comp_id;
@@ -33,5 +34,13 @@ public class DrugComposition {
 
     public void setPercent(BigDecimal percent) {
         this.percent = percent;
+    }
+
+    public int getGen_id() {
+        return gen_id;
+    }
+
+    public void setGen_id(int gen_id) {
+        this.gen_id = gen_id;
     }
 }
