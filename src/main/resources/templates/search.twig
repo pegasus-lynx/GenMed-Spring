@@ -1,0 +1,52 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header>
+    <div class="bg-image">
+        <h3 class="ft-rw">Marketplace</h3>
+        <h4 class="ft-rw">Search the shops here</h4>
+        <br>
+        <form action="/search" method="get" id="search">
+            <p>
+                <input name="drug_name" id="name_box" list="drugs_list" autocomplete="on" onchange="setDrugID()">
+                <datalist id="drugs_list">
+                    {% for row in drugs %}
+                    <option value="{{ row.name }}@{{ row.mf_name }}" data-id="{{ row.drug_id }}">
+                    {% endfor %}
+                </datalist>
+                <input type="hidden" name="drug_id" id="drug_id">
+                <input type="submit" name="info" value="Find">
+                <br>
+            </p>
+        </form>
+    </div>
+</header>
+
+<div class="wrapper-table">
+    <section>
+        <h2 class="table-title ft-rw">List of Shops</h2>
+        <table>
+            <tr class="table-head ft-rw">
+                <th> Shop Name </th>
+                <th> Link </th>
+            </tr>
+            {% for row in shops %}
+            <tr>
+                <td> {{ row.shop_name }}</td>
+                <td><a href="/shop/{{ row.shop_id }}"><span class="detail-button fc-white txt-sb"> View Shop </span></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</div>
+
+<script>
+    function setDrugID() {
+        var val = $('#name_box').val();
+        var did = $('#drugs_list option').filter(function() {
+            return this.value == val;
+        }).attr('data-id');
+        console.log(did);
+    }
+</script>
+{% endblock %}

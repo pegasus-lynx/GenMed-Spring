@@ -1,0 +1,83 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Add Items to Order </h1>
+    </div>
+</header>
+
+<div class="wrapper-table">
+    <section id="about">
+        <h3 class="ft-lt"> Current Order Info : </h3>
+        <table>
+            <tr>
+                <td> Order ID </td>
+                <td> {{ order.order_id }}</td>
+            </tr>
+            <tr>
+                <td> Order Status </td>
+                <td> {{ order.status }}</td>
+            </tr>
+            <tr>
+                <td> Order Date </td>
+                <td> {{ order.order_date}} </td>
+            </tr>
+            <tr>
+                <td> Order Time </td>
+                <td> {{ order.order_time }}</td>
+            </tr>
+            <tr>
+                <td> Current Bill Amount </td>
+                <td> {{ order.bill_amount }} </td>
+            </tr>
+        </table>
+
+        <h3 class="ft-lt"> Current Items in the order : </h3>
+        <table>
+            {% for row in order.items %}
+            <tr>
+                <td> {{ row.batch_id }}</td>
+                <td> {{ row.quantity }}</td>
+                <td> {{ row.price }}</td>
+                <td> Remove Item </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section></div>
+<br>
+<br>
+<br>
+<div class="wrapper-form">
+        <form class="post-forms" action="/self/shop/{{shop_id}}/order/{{ order.order_id }}/add_items" method="POST" id="order_item_form">
+            <select name="item_name" id="item_name" onchange="setFormFields()" required>
+                <option value="0">---</option>
+                {% for row in items %}
+                <option value="{{ row.item_id }}@{{ row.quantity }}@{{ row.price }}">{{ row.drugBatch.drug.name }} @ {{ row.drugBatch.drug.mf_name }}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="item_id" id="item_id">
+            <input type="hidden" name="price" id="price">
+            <input type="number" placeholder="Quantity"  name="quantity" id="quantity" min="1" onfocusout="checkQuantity()" required/>
+            <input type="submit" value="Add Item" /><br>
+            <p id="err"></p>
+        </form>
+</div>
+<br>
+<br>
+<a href="/self/shop/{{shop_id}}/order/{{ order.order_id }}/complete"><span class="detail-button-lg fc-white txt-sb">Complete</span></a>
+<a href="/self/cancel/order/{{order_id}}"><span class="detail-button-lg fc-white txt-sb">Cancel</span></a>
+
+
+<script>
+    function setFormFields() {
+        var x = $('#item_name').children("option:selected").val();
+        var res = x.split('@');
+        console.log(typeof res);
+        $('#item_id').attr('value',parseInt(res[0]));
+        $('#quantity').attr('max',parseInt(res[1]));
+        $('#price').attr('value',parseInt(res[2]));
+    }
+</script>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+{% extends 'adminBase.twig' %}
+
+{% block content %}
+<header class="main_header">
+    <div class="bg-image">
+        <h2 class="ft-rw"> Add Drug Component </h2>
+    </div>
+</header>
+
+<div class="wrapper-form">
+    <section id="about">
+        <form class="post-forms" action="/admin/add/composition" method="POST" id="composition_form">
+            <input type="text" name="percent" placeholder="Percentage Composition" required>
+            <select name="gen_id" id="gen_name" required>
+                {% for row in gen_drugs %}
+                <option value="{{ row.gen_id}}">{{ row.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="comp_id" id="comp_name" required>
+                {% for row in drug_comps %}
+                <option value="{{ row.comp_id}}">{{ row.comp_name }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add Composition" />
+        </form>
+    </section>
+</div>
+
+{% endblock %}

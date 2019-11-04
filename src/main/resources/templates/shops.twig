@@ -1,0 +1,36 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header>
+    <div class="bg-image">
+        <h3 class="ft-rw">Marketplace</h3>
+        <h4 class="ft-rw">Search the shops here</h4>
+        <br>
+        <form action="/shops" method="get" id="search">
+            <p>
+                <input type="text" name="name" id="name_box">
+                <input type="submit" name="info" value="Find">
+                <br>
+            </p>
+        </form>
+    </div>
+</header>
+
+<div class="wrapper-table">
+    <section>
+        <h2 class="table-title ft-rw">List of All Shops</h2>
+        <table>
+            <tr class="table-head ft-rw">
+                <th> Shop Name </th>
+                <th> Link </th>
+            </tr>
+            {% for row in shops %}
+            <tr>
+                <td> {{ row.shop_name }}</td>
+                <td><a href="/shop/{{ row.shop_id }}"><span class="detail-button fc-white txt-sb"> View Shop </span></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
+</div>
+{% endblock %}

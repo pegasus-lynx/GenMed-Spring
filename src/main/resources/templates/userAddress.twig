@@ -1,0 +1,57 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Add Address </h1>
+    </div>
+</header>
+
+<div class="wrapper-form">
+    <section id="about">
+        <h3 class="ft-lt"> Address Form </h3>
+        <form class="post-forms" action="/self/add_address" method="POST" id="address_form">
+            <input type="text" placeholder="Plot Number" class="login-input" name="plot_no" required/><br>
+            <input type="text" placeholder="Street" class="login-input" name="street" required/><br>
+            <input type="text" placeholder="City" class="login-input" name="city" required/><br>
+            <input type="text" placeholder="District" class="login-input" name="district" required/><br>
+            <input type="text" placeholder="State" class="login-input" name="state" required/><br>
+
+            <input type="text" name="latitude" id="lat" placeholder="Latitude" required/><br>
+            <input type="text" name="longitude" id="lon" placeholder="Longitude" required/><br>
+            <input type="button" class="inp" id="loc_btn" onclick="getLocation()" value="Fetch Location">
+
+            <select name="address_type" form="address_form" required>
+                <option value="home">Home</option>
+                <option value="work">Work</option>
+                <option value="other">Other</option>
+            </select>
+
+            <input type="submit" value="Add Address" />
+        </form>
+    </section>
+</div>
+
+<script>
+    var lat = document.getElementById("lat");
+    var lon = document.getElementById("lon");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(storePosition, showError);
+        } else {
+            $('#loc_err').attr('visibility','visible')
+        }
+    }
+
+    function storePosition(position) {
+        $('#lat').attr("value", position.coords.latitude);
+        $('#lon').attr("value", position.coords.longitude);
+    }
+
+    function showError(err) {
+        console.log(err)
+    }
+</script>
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% block nav %}
+<nav class="menu navbar navbar-expand-md sticky-top bg-dark" id="navigation">
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav navbar-left txt-bd ft-bd" id="left-nav">
+            <li class="nav-item"><a href="/admin" class="nav-link fc-white">Home</a></li>
+            <div class="dropdown">
+                <li class="nav-item"><a href="#" class="nav-link fc-white">Create</a></li>
+                <div class="dropdown-content">
+                    <a href="/admin/add/generic_drug"> Generic Drug</a>
+                    <a href="/admin/add/drug_component"> Drug Component</a>
+                    <a href="/admin/add/composition"> Drug Composition </a>
+                </div>
+            </div>
+            <li class="nav-item"><a href="/logout" class="nav-link fc-white">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}

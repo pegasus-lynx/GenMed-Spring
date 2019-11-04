@@ -1,0 +1,106 @@
+{% extends 'base.twig' %}
+
+{% block header %}
+{% include 'shopNav.twig' %}
+{% endblock%}
+
+{% block content %}
+<header class="gen_header">
+    <div class="bg-image">
+        <h1 class="ft-rw"> Add Drug Batch </h1>
+    </div>
+</header>
+
+<div class="wrapper-form">
+    <section id="about">
+        <form class="post-forms" action="/account/{{ shop_id }}/add_drug_batch" method="POST" id="drug_batch_form">
+            <input type="text" placeholder="Batch No"  name="batch_no" required/><br>
+
+            <input type="date" placeholder="MFG DATE"  name="mfg_date" required/><br>
+            <input type="date" placeholder="EXP DATE"  name="exp_date" required/><br>
+
+            <select name="is_gen" id="is_gen" onchange="getMfName()" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <select name="mf_name" id="mf_name" onchange="getDrugName()" required></select>
+            <select name="drug_name" id="drug_name" onchange="setDrugID()" required></select>
+
+            <input type="hidden" id="drug_id" name="drug_id">
+
+            <input type="submit" value="Add Drug Batch" />
+        </form>
+    </section>
+</div>
+
+<script>
+    function addMfName(mf_names) {
+        var i;
+        var opts="<option value=\"-1\" > -- </option>";
+        console.log(mf_names.length)
+        for(i=0; i<mf_names.length; i++){
+            opts += "<option value=" + mf_names[i] +  ">" + mf_names[i] + "</option>"
+        }
+        $("#mf_name").html(opts);
+    }
+
+    function getMfName() {
+        $.ajax({
+            url:"/api/get/mf_names",
+            type:"get",
+            data:{
+                is_generic: $('#is_gen').children("option:selected").val()
+            },
+            success: function(data, status, xhr){
+                console.log(data);
+                console.log(typeof data);
+                addMfName(data);
+            }
+        })
+    }
+
+    function addDrugName(drug_names) {
+        var i;
+        var opts="<option value=\"-1\" > -- </option>";
+        for(i=0; i<drug_names.length; i++){
+            opts += "<option value=" + drug_names[i] +  ">" + drug_names[i] + "</option>"
+        }
+        $("#drug_name").html(opts);
+    }
+
+    function getDrugName() {
+         $.ajax({
+            url:"/api/get/drug_names",
+            type:"get",
+            data:{
+                is_generic: $('#is_gen').children("option:selected").val(),
+                mf_name: $('#mf_name').children("option:selected").val()
+            },
+            success: function(data, status, xhr){
+                console.log(data);
+                console.log(typeof data);
+                addDrugName(data);
+            }
+        })
+    }
+
+    function setDrugID() {
+        $.ajax({
+            url:"/api/get/drug_id",
+            type:"get",
+            data:{
+                is_generic: $('#is_gen').children("option:selected").val(),
+                mf_name: $('#mf_name').children("option:selected").val(),
+                drug_name: $('#drug_name').children("option:selected").val()
+            },
+            success: function(data, status, xhr){
+                console.log(data)
+                console.log(typeof data)
+                $('#drug_id').attr('value',data);
+            }
+        })
+    }
+</script>
+{% endblock %}
+
