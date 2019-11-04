@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependancy/* com.genmed.genmed.WebApplication
+web: java -jar $JAVA_OPTS -Dserver.port=$PORT target/genmed-0.0.1-SNAPSHOT.war
