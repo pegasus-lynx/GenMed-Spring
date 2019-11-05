@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.constraints.Null;
 import java.security.Principal;
 
 @Controller
@@ -33,7 +34,7 @@ public class ShopController {
         else{
             m.addAttribute("shops", shopDao.getShopsWithNameLike(name));
         }
-        m.addAttribute("user_email", p.getName());
+        if(p != null) m.addAttribute("user_email", p.getName());
         return "shops";
     }
 

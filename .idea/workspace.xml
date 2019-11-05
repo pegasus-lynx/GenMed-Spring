@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9157a6c7-d722-452b-89a1-09e43e73d2dd" name="Default Changelist" comment="" />
+    <list default="true" id="9157a6c7-d722-452b-89a1-09e43e73d2dd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/GenMed-Spring.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GenMed-Spring.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/genmed/genmed/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/genmed/genmed/controller/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/genmed/genmed/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/genmed/genmed/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/util.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/util.css" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1RdIFAx0bQ2Qy19E4yb5SdmmSHa" />
   <component name="PropertiesComponent">
@@ -36,5 +46,16 @@
       <updated>1569990440278</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
