@@ -1,20 +1,3 @@
-| address               |
-| addressOfUser         |
-| drugBatch             |
-| drugComponents        |
-| drugs                 |
-| genericDrugComposition |
-| genericDrugs          |
-| itemsOrdered          |
-| orders                |
-| owner                 |
-| reviews               |
-| shop                  |
-| shopInventory         |
-| shopPhone             |
-| user                  |
-| userPhone
-
 insert into drugComponents(comp_name) values ('CompA');
 insert into drugComponents(comp_name) values ('CompB');
 insert into drugComponents(comp_name) values ('CompC');
